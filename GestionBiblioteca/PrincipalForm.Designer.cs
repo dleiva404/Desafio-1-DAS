@@ -45,11 +45,26 @@
             btnAgregarLibro = new Button();
             dgvLibros = new DataGridView();
             TabUsuarios = new TabPage();
+            txtTelefono = new TextBox();
+            txtCorreo = new TextBox();
+            txtNombre = new TextBox();
+            lblTelefono = new Label();
+            lblCorreo = new Label();
+            lblNombre = new Label();
+            panelBotonesUsuarios = new Panel();
+            btnLimpiarUsuario = new Button();
+            btnEliminarUsuario = new Button();
+            btnEditarUsuario = new Button();
+            btnAgregarUsuario = new Button();
+            dgvUsuarios = new DataGridView();
             TabPrestamos = new TabPage();
             TabControl1.SuspendLayout();
             TabLibros.SuspendLayout();
             panelBotonesLibros.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dgvLibros).BeginInit();
+            TabUsuarios.SuspendLayout();
+            panelBotonesUsuarios.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)dgvUsuarios).BeginInit();
             SuspendLayout();
             // 
             // TabControl1
@@ -212,6 +227,14 @@
             // 
             // TabUsuarios
             // 
+            TabUsuarios.Controls.Add(txtTelefono);
+            TabUsuarios.Controls.Add(txtCorreo);
+            TabUsuarios.Controls.Add(txtNombre);
+            TabUsuarios.Controls.Add(lblTelefono);
+            TabUsuarios.Controls.Add(lblCorreo);
+            TabUsuarios.Controls.Add(lblNombre);
+            TabUsuarios.Controls.Add(panelBotonesUsuarios);
+            TabUsuarios.Controls.Add(dgvUsuarios);
             TabUsuarios.Location = new Point(4, 24);
             TabUsuarios.Name = "TabUsuarios";
             TabUsuarios.Padding = new Padding(3);
@@ -219,6 +242,116 @@
             TabUsuarios.TabIndex = 1;
             TabUsuarios.Text = "Usuarios";
             TabUsuarios.UseVisualStyleBackColor = true;
+            // 
+            // txtTelefono
+            // 
+            txtTelefono.Location = new Point(638, 380);
+            txtTelefono.Name = "txtTelefono";
+            txtTelefono.Size = new Size(100, 23);
+            txtTelefono.TabIndex = 7;
+            // 
+            // txtCorreo
+            // 
+            txtCorreo.Location = new Point(353, 380);
+            txtCorreo.Name = "txtCorreo";
+            txtCorreo.Size = new Size(100, 23);
+            txtCorreo.TabIndex = 6;
+            // 
+            // txtNombre
+            // 
+            txtNombre.Location = new Point(126, 380);
+            txtNombre.Name = "txtNombre";
+            txtNombre.Size = new Size(100, 23);
+            txtNombre.TabIndex = 5;
+            // 
+            // lblTelefono
+            // 
+            lblTelefono.AutoSize = true;
+            lblTelefono.Location = new Point(570, 388);
+            lblTelefono.Name = "lblTelefono";
+            lblTelefono.Size = new Size(62, 15);
+            lblTelefono.TabIndex = 4;
+            lblTelefono.Text = "Teléfono : ";
+            // 
+            // lblCorreo
+            // 
+            lblCorreo.AutoSize = true;
+            lblCorreo.Location = new Point(295, 388);
+            lblCorreo.Name = "lblCorreo";
+            lblCorreo.Size = new Size(52, 15);
+            lblCorreo.TabIndex = 3;
+            lblCorreo.Text = "Correo : ";
+            // 
+            // lblNombre
+            // 
+            lblNombre.AutoSize = true;
+            lblNombre.Location = new Point(63, 388);
+            lblNombre.Name = "lblNombre";
+            lblNombre.Size = new Size(57, 15);
+            lblNombre.TabIndex = 2;
+            lblNombre.Text = "Nombre :";
+            // 
+            // panelBotonesUsuarios
+            // 
+            panelBotonesUsuarios.Controls.Add(btnLimpiarUsuario);
+            panelBotonesUsuarios.Controls.Add(btnEliminarUsuario);
+            panelBotonesUsuarios.Controls.Add(btnEditarUsuario);
+            panelBotonesUsuarios.Controls.Add(btnAgregarUsuario);
+            panelBotonesUsuarios.Dock = DockStyle.Bottom;
+            panelBotonesUsuarios.Location = new Point(3, 530);
+            panelBotonesUsuarios.Name = "panelBotonesUsuarios";
+            panelBotonesUsuarios.Size = new Size(1170, 100);
+            panelBotonesUsuarios.TabIndex = 1;
+            // 
+            // btnLimpiarUsuario
+            // 
+            btnLimpiarUsuario.Location = new Point(518, 30);
+            btnLimpiarUsuario.Name = "btnLimpiarUsuario";
+            btnLimpiarUsuario.Size = new Size(75, 23);
+            btnLimpiarUsuario.TabIndex = 11;
+            btnLimpiarUsuario.Text = "Limpiar";
+            btnLimpiarUsuario.UseVisualStyleBackColor = true;
+            btnLimpiarUsuario.Click += btnLimpiarUsuario_Click;
+            // 
+            // btnEliminarUsuario
+            // 
+            btnEliminarUsuario.Location = new Point(375, 30);
+            btnEliminarUsuario.Name = "btnEliminarUsuario";
+            btnEliminarUsuario.Size = new Size(75, 23);
+            btnEliminarUsuario.TabIndex = 10;
+            btnEliminarUsuario.Text = "Eliminar";
+            btnEliminarUsuario.UseVisualStyleBackColor = true;
+            btnEliminarUsuario.Click += btnEliminarUsuario_Click;
+            // 
+            // btnEditarUsuario
+            // 
+            btnEditarUsuario.Location = new Point(233, 30);
+            btnEditarUsuario.Name = "btnEditarUsuario";
+            btnEditarUsuario.Size = new Size(75, 23);
+            btnEditarUsuario.TabIndex = 9;
+            btnEditarUsuario.Text = "Editar";
+            btnEditarUsuario.UseVisualStyleBackColor = true;
+            btnEditarUsuario.Click += btnEditarUsuario_Click;
+            // 
+            // btnAgregarUsuario
+            // 
+            btnAgregarUsuario.Location = new Point(90, 30);
+            btnAgregarUsuario.Name = "btnAgregarUsuario";
+            btnAgregarUsuario.Size = new Size(75, 23);
+            btnAgregarUsuario.TabIndex = 8;
+            btnAgregarUsuario.Text = "Agregar";
+            btnAgregarUsuario.UseVisualStyleBackColor = true;
+            btnAgregarUsuario.Click += btnAgregarUsuario_Click;
+            // 
+            // dgvUsuarios
+            // 
+            dgvUsuarios.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dgvUsuarios.Dock = DockStyle.Top;
+            dgvUsuarios.Location = new Point(3, 3);
+            dgvUsuarios.Name = "dgvUsuarios";
+            dgvUsuarios.Size = new Size(1170, 300);
+            dgvUsuarios.TabIndex = 0;
+            dgvUsuarios.CellClick += dgvUsuarios_CellClick;
             // 
             // TabPrestamos
             // 
@@ -245,6 +378,10 @@
             TabLibros.PerformLayout();
             panelBotonesLibros.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)dgvLibros).EndInit();
+            TabUsuarios.ResumeLayout(false);
+            TabUsuarios.PerformLayout();
+            panelBotonesUsuarios.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)dgvUsuarios).EndInit();
             ResumeLayout(false);
         }
 
@@ -268,5 +405,17 @@
         private TextBox txtAnio;
         private TextBox txtGenero;
         private TextBox txtTitulo;
+        private Label lblNombre;
+        private Panel panelBotonesUsuarios;
+        private DataGridView dgvUsuarios;
+        private TextBox txtTelefono;
+        private TextBox txtCorreo;
+        private TextBox txtNombre;
+        private Label lblTelefono;
+        private Label lblCorreo;
+        private Button btnLimpiarUsuario;
+        private Button btnEliminarUsuario;
+        private Button btnEditarUsuario;
+        private Button btnAgregarUsuario;
     }
 }

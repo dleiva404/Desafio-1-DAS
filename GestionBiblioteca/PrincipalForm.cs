@@ -12,14 +12,14 @@ namespace GestionBiblioteca
         public PrincipalForm()
         {
             InitializeComponent();
-            CargarLibros();
         }
-
         // ===== LIBROS =====
         private void CargarLibros()
         {
             dgvLibros.DataSource = null;
             dgvLibros.DataSource = _libroService.ObtenerTodos();
+            dgvLibros.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            dgvLibros.MultiSelect = false;
         }
 
         private void btnAgregarLibro_Click(object sender, EventArgs e)
@@ -95,17 +95,108 @@ namespace GestionBiblioteca
             txtAutor.Text = "";
             txtAnio.Text = "";
             txtGenero.Text = "";
+            dgvLibros.ClearSelection();
         }
 
         private void dgvLibros_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            if (e.RowIndex >= 0)
+            if (e.RowIndex >= 0 && e.RowIndex < dgvLibros.Rows.Count)
             {
                 var row = dgvLibros.Rows[e.RowIndex];
-                txtTitulo.Text = row.Cells["Titulo"].Value?.ToString();
-                txtAutor.Text = row.Cells["Autor"].Value?.ToString();
-                txtAnio.Text = row.Cells["Anio"].Value?.ToString();
-                txtGenero.Text = row.Cells["Genero"].Value?.ToString();
+                if (row.Cells["Titulo"].Value != null)
+                {
+                    txtTitulo.Text = row.Cells["Titulo"].Value?.ToString();
+                    txtAutor.Text = row.Cells["Autor"].Value?.ToString();
+                    txtAnio.Text = row.Cells["Anio"].Value?.ToString();
+                    txtGenero.Text = row.Cells["Genero"].Value?.ToString();
+                }
+            }
+        }
+        private void CargarUsuarios()
+        {
+            dgvUsuarios.DataSource = null;
+            dgvUsuarios.DataSource = _usuarioService.ObtenerTodos();
+            dgvUsuarios.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            dgvUsuarios.MultiSelect = false;
+        }
+
+        private void btnAgregarUsuario_Click(object sender, EventArgs e)
+        {
+            if (string.IsNullOrWhiteSpace(txtNombre.Text) ||
+                string.IsNullOrWhiteSpace(txtCorreo.Text) ||
+                string.IsNullOrWhiteSpace(txtTelefono.Text))
+            {
+                MessageBox.Show("Todos los campos son obligatorios.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            try
+            {
+                _usuarioService.Agregar(txtNombre.Text, txtCorreo.Text, txtTelefono.Text);
+                CargarUsuarios();
+                LimpiarCamposUsuario();
+                MessageBox.Show("Usuario agregado correctamente.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void btnEditarUsuario_Click(object sender, EventArgs e)
+        {
+            if (dgvUsuarios.SelectedRows.Count == 0)
+            {
+                MessageBox.Show("Selecciona un usuario para editar.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            int id = (int)dgvUsuarios.SelectedRows[0].Cells["Id"].Value;
+            _usuarioService.Actualizar(id, txtNombre.Text, txtCorreo.Text, txtTelefono.Text);
+            CargarUsuarios();
+            LimpiarCamposUsuario();
+            MessageBox.Show("Usuario actualizado correctamente.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
+
+        private void btnEliminarUsuario_Click(object sender, EventArgs e)
+        {
+            if (dgvUsuarios.SelectedRows.Count == 0)
+            {
+                MessageBox.Show("Selecciona un usuario para eliminar.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            int id = (int)dgvUsuarios.SelectedRows[0].Cells["Id"].Value;
+            var confirmacion = MessageBox.Show("¿Estás seguro de eliminar este usuario?", "Confirmar", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            if (confirmacion == DialogResult.Yes)
+            {
+                _usuarioService.Eliminar(id);
+                CargarUsuarios();
+                LimpiarCamposUsuario();
+            }
+        }
+
+        private void btnLimpiarUsuario_Click(object sender, EventArgs e)
+        {
+            LimpiarCamposUsuario();
+        }
+
+        private void LimpiarCamposUsuario()
+        {
+            txtNombre.Text = "";
+            txtCorreo.Text = "";
+            txtTelefono.Text = "";
+            dgvUsuarios.ClearSelection();
+        }
+
+        private void dgvUsuarios_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex >= 0)
+            {
+                var row = dgvUsuarios.Rows[e.RowIndex];
+                txtNombre.Text = row.Cells["Nombre"].Value?.ToString();
+                txtCorreo.Text = row.Cells["Correo"].Value?.ToString();
+                txtTelefono.Text = row.Cells["Telefono"].Value?.ToString();
             }
         }
     }
