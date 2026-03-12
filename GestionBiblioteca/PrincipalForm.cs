@@ -3,6 +3,9 @@ using GestionBiblioteca.Services;
 using System.ComponentModel;
 using System.Data;
 using ScottPlot;
+using Font = System.Drawing.Font;
+using Color = System.Drawing.Color;
+using FontStyle = System.Drawing.FontStyle;
 
 namespace GestionBiblioteca
 {
@@ -32,6 +35,10 @@ namespace GestionBiblioteca
             dgvLibros.MultiSelect = false;
             if (dgvLibros.Columns.Contains("Disponible"))
                 dgvLibros.Columns["Disponible"].Visible = false;
+            dgvLibros.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            dgvLibros.ColumnHeadersDefaultCellStyle.Font = new Font("Segoe UI", 9, FontStyle.Bold);
+            dgvLibros.RowTemplate.Height = 28;
+            dgvLibros.AlternatingRowsDefaultCellStyle.BackColor = Color.FromArgb(240, 248, 255);
         }
 
         private bool ValidarLibro()
@@ -42,12 +49,6 @@ namespace GestionBiblioteca
                 string.IsNullOrWhiteSpace(txtGenero.Text))
             {
                 MessageBox.Show("Todos los campos son obligatorios.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return false;
-            }
-
-            if (txtTitulo.Text.Any(char.IsDigit))
-            {
-                MessageBox.Show("El título no puede contener números.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return false;
             }
 
@@ -145,6 +146,10 @@ namespace GestionBiblioteca
             dgvUsuarios.MultiSelect = false;
             if (dgvUsuarios.Columns.Contains("Prestamos"))
                 dgvUsuarios.Columns["Prestamos"].Visible = false;
+            dgvUsuarios.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            dgvUsuarios.ColumnHeadersDefaultCellStyle.Font = new Font("Segoe UI", 9, FontStyle.Bold);
+            dgvUsuarios.RowTemplate.Height = 28;
+            dgvUsuarios.AlternatingRowsDefaultCellStyle.BackColor = Color.FromArgb(240, 248, 255);
         }
 
         private bool ValidarUsuario()
@@ -277,6 +282,10 @@ namespace GestionBiblioteca
             dgvPrestamos.DataSource = tabla;
             dgvPrestamos.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             dgvPrestamos.MultiSelect = false;
+            dgvPrestamos.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            dgvPrestamos.ColumnHeadersDefaultCellStyle.Font = new Font("Segoe UI", 9, FontStyle.Bold);
+            dgvPrestamos.RowTemplate.Height = 28;
+            dgvPrestamos.AlternatingRowsDefaultCellStyle.BackColor = Color.FromArgb(240, 248, 255);
         }
 
         private void CargarComboBoxes()
@@ -345,7 +354,6 @@ namespace GestionBiblioteca
             }
 
             int id = (int)dgvPrestamos.SelectedRows[0].Cells["Id"].Value;
-
             var estado = dgvPrestamos.SelectedRows[0].Cells["Estado"].Value?.ToString();
             if (estado == "Devuelto")
             {
