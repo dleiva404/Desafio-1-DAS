@@ -2,6 +2,7 @@ using GestionBiblioteca.Models;
 using GestionBiblioteca.Services;
 using System.ComponentModel;
 using System.Data;
+using ScottPlot;
 
 namespace GestionBiblioteca
 {
@@ -17,6 +18,8 @@ namespace GestionBiblioteca
             CargarLibros();
             CargarUsuarios();
             CargarPrestamos();
+            dtpFechaDevolucion.Value = DateTime.Now.AddDays(7);
+            dtpFechaDevolucion.MinDate = DateTime.Now.AddDays(1);
         }
 
         // ===== LIBROS =====
@@ -93,10 +96,7 @@ namespace GestionBiblioteca
             }
         }
 
-        private void btnLimpiarLibro_Click(object sender, EventArgs e)
-        {
-            LimpiarCamposLibro();
-        }
+        private void btnLimpiarLibro_Click(object sender, EventArgs e) => LimpiarCamposLibro();
 
         private void LimpiarCamposLibro()
         {
@@ -189,10 +189,7 @@ namespace GestionBiblioteca
             }
         }
 
-        private void btnLimpiarUsuario_Click(object sender, EventArgs e)
-        {
-            LimpiarCamposUsuario();
-        }
+        private void btnLimpiarUsuario_Click(object sender, EventArgs e) => LimpiarCamposUsuario();
 
         private void LimpiarCamposUsuario()
         {
@@ -235,7 +232,7 @@ namespace GestionBiblioteca
                     p.Libro.Titulo,
                     p.Usuario.Nombre,
                     p.FechaPrestamo.ToString("dd/MM/yyyy"),
-                    p.FechaDevolucion.ToString("dd/MM/yyyy"),
+                    p.Devuelto ? p.FechaDevolucion.ToString("dd/MM/yyyy") : "",
                     p.Devuelto ? "Devuelto" : "Pendiente"
                 );
             }
@@ -269,6 +266,11 @@ namespace GestionBiblioteca
             {
                 CargarComboBoxes();
                 CargarPrestamos();
+            }
+            if (TabControl1.SelectedTab == TabEstadisticas)
+            {
+                MostrarGraficoLibrosMasPrestados();
+                MostrarGraficoUsuariosMasActivos();
             }
         }
 
@@ -321,6 +323,81 @@ namespace GestionBiblioteca
             dgvPrestamos.ClearSelection();
             if (cmbUsuario.Items.Count > 0) cmbUsuario.SelectedIndex = 0;
             if (cmbLibro.Items.Count > 0) cmbLibro.SelectedIndex = 0;
+        }
+
+        // ===== ESTADISTICAS =====
+        private void btnGenerarGraficos_Click(object sender, EventArgs e)
+        {
+            MostrarGraficoLibrosMasPrestados();
+            MostrarGraficoUsuariosMasActivos();
+        }
+
+        private void MostrarGraficoLibrosMasPrestados()
+        {
+            panelGrafico1.Controls.Clear();
+
+            var prestamos = _prestamoService.ObtenerTodos();
+            var datos = prestamos
+                .GroupBy(p => p.Libro.Titulo)
+                .Select(g => new { Titulo = g.Key, Total = g.Count() })
+                .OrderByDescending(x => x.Total)
+                .Take(5)
+                .ToList();
+
+            if (datos.Count == 0)
+            {
+                MessageBox.Show("No hay préstamos registrados.", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
+
+            var formsPlot = new ScottPlot.WinForms.FormsPlot { Dock = DockStyle.Fill };
+            var plot = formsPlot.Plot;
+
+            double[] valores = datos.Select(x => (double)x.Total).ToArray();
+            string[] etiquetas = datos.Select(x => x.Titulo).ToArray();
+
+            plot.Add.Bars(valores);
+            plot.Axes.Bottom.SetTicks(
+                Enumerable.Range(0, etiquetas.Length).Select(i => (double)i).ToArray(),
+                etiquetas
+            );
+            plot.Title("Libros más prestados");
+            plot.YLabel("Total préstamos");
+            formsPlot.Refresh();
+
+            panelGrafico1.Controls.Add(formsPlot);
+        }
+
+        private void MostrarGraficoUsuariosMasActivos()
+        {
+            panelGrafico2.Controls.Clear();
+
+            var prestamos = _prestamoService.ObtenerTodos();
+            var datos = prestamos
+                .GroupBy(p => p.Usuario.Nombre)
+                .Select(g => new { Nombre = g.Key, Total = g.Count() })
+                .OrderByDescending(x => x.Total)
+                .Take(5)
+                .ToList();
+
+            if (datos.Count == 0) return;
+
+            var formsPlot = new ScottPlot.WinForms.FormsPlot { Dock = DockStyle.Fill };
+            var plot = formsPlot.Plot;
+
+            double[] valores = datos.Select(x => (double)x.Total).ToArray();
+            string[] etiquetas = datos.Select(x => x.Nombre).ToArray();
+
+            plot.Add.Bars(valores);
+            plot.Axes.Bottom.SetTicks(
+                Enumerable.Range(0, etiquetas.Length).Select(i => (double)i).ToArray(),
+                etiquetas
+            );
+            plot.Title("Usuarios más activos");
+            plot.YLabel("Total préstamos");
+            formsPlot.Refresh();
+
+            panelGrafico2.Controls.Add(formsPlot);
         }
     }
 }
