@@ -34,7 +34,7 @@ namespace GestionBiblioteca
                 dgvLibros.Columns["Disponible"].Visible = false;
         }
 
-        private void btnAgregarLibro_Click(object sender, EventArgs e)
+        private bool ValidarLibro()
         {
             if (string.IsNullOrWhiteSpace(txtTitulo.Text) ||
                 string.IsNullOrWhiteSpace(txtAutor.Text) ||
@@ -42,15 +42,34 @@ namespace GestionBiblioteca
                 string.IsNullOrWhiteSpace(txtGenero.Text))
             {
                 MessageBox.Show("Todos los campos son obligatorios.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
+                return false;
             }
 
-            if (!int.TryParse(txtAnio.Text, out int anio))
+            if (txtTitulo.Text.Any(char.IsDigit))
             {
-                MessageBox.Show("El año debe ser un número.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
+                MessageBox.Show("El título no puede contener números.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return false;
             }
 
+            if (txtAutor.Text.Any(char.IsDigit))
+            {
+                MessageBox.Show("El autor no puede contener números.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return false;
+            }
+
+            if (!int.TryParse(txtAnio.Text, out int anio) || anio < 1000 || anio > DateTime.Now.Year)
+            {
+                MessageBox.Show($"El año debe ser un número entre 1000 y {DateTime.Now.Year}.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return false;
+            }
+
+            return true;
+        }
+
+        private void btnAgregarLibro_Click(object sender, EventArgs e)
+        {
+            if (!ValidarLibro()) return;
+            int.TryParse(txtAnio.Text, out int anio);
             _libroService.Agregar(txtTitulo.Text, txtAutor.Text, anio, txtGenero.Text);
             CargarLibros();
             LimpiarCamposLibro();
@@ -64,14 +83,9 @@ namespace GestionBiblioteca
                 MessageBox.Show("Selecciona un libro para editar.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
-
+            if (!ValidarLibro()) return;
             int id = (int)dgvLibros.SelectedRows[0].Cells["Id"].Value;
-            if (!int.TryParse(txtAnio.Text, out int anio))
-            {
-                MessageBox.Show("El año debe ser un número.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
-            }
-
+            int.TryParse(txtAnio.Text, out int anio);
             _libroService.Actualizar(id, txtTitulo.Text, txtAutor.Text, anio, txtGenero.Text);
             CargarLibros();
             LimpiarCamposLibro();
@@ -133,16 +147,40 @@ namespace GestionBiblioteca
                 dgvUsuarios.Columns["Prestamos"].Visible = false;
         }
 
-        private void btnAgregarUsuario_Click(object sender, EventArgs e)
+        private bool ValidarUsuario()
         {
             if (string.IsNullOrWhiteSpace(txtNombre.Text) ||
                 string.IsNullOrWhiteSpace(txtCorreo.Text) ||
                 string.IsNullOrWhiteSpace(txtTelefono.Text))
             {
                 MessageBox.Show("Todos los campos son obligatorios.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
+                return false;
             }
 
+            if (txtNombre.Text.Any(char.IsDigit))
+            {
+                MessageBox.Show("El nombre no puede contener números.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return false;
+            }
+
+            if (!txtCorreo.Text.Contains("@") || !txtCorreo.Text.Contains("."))
+            {
+                MessageBox.Show("El correo no tiene un formato válido.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return false;
+            }
+
+            if (!txtTelefono.Text.All(char.IsDigit))
+            {
+                MessageBox.Show("El teléfono solo puede contener números.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return false;
+            }
+
+            return true;
+        }
+
+        private void btnAgregarUsuario_Click(object sender, EventArgs e)
+        {
+            if (!ValidarUsuario()) return;
             try
             {
                 _usuarioService.Agregar(txtNombre.Text, txtCorreo.Text, txtTelefono.Text);
@@ -163,7 +201,7 @@ namespace GestionBiblioteca
                 MessageBox.Show("Selecciona un usuario para editar.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
-
+            if (!ValidarUsuario()) return;
             int id = (int)dgvUsuarios.SelectedRows[0].Cells["Id"].Value;
             _usuarioService.Actualizar(id, txtNombre.Text, txtCorreo.Text, txtTelefono.Text);
             CargarUsuarios();
@@ -307,6 +345,14 @@ namespace GestionBiblioteca
             }
 
             int id = (int)dgvPrestamos.SelectedRows[0].Cells["Id"].Value;
+
+            var estado = dgvPrestamos.SelectedRows[0].Cells["Estado"].Value?.ToString();
+            if (estado == "Devuelto")
+            {
+                MessageBox.Show("Este préstamo ya fue devuelto.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
             var confirmacion = MessageBox.Show("¿Confirmar devolución?", "Confirmar", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
             if (confirmacion == DialogResult.Yes)
             {
