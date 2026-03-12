@@ -58,6 +58,17 @@
             btnAgregarUsuario = new Button();
             dgvUsuarios = new DataGridView();
             TabPrestamos = new TabPage();
+            dtpFechaDevolucion = new DateTimePicker();
+            cmbLibro = new ComboBox();
+            cmbUsuario = new ComboBox();
+            lblFechaDevolucion = new Label();
+            lblLibroPrestamo = new Label();
+            lblUsuarioPrestamo = new Label();
+            panelBotonesPrestamos = new Panel();
+            btnLimpiarPrestamo = new Button();
+            btnDevolverPrestamo = new Button();
+            btnRegistrarPrestamo = new Button();
+            dgvPrestamos = new DataGridView();
             TabControl1.SuspendLayout();
             TabLibros.SuspendLayout();
             panelBotonesLibros.SuspendLayout();
@@ -65,6 +76,9 @@
             TabUsuarios.SuspendLayout();
             panelBotonesUsuarios.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dgvUsuarios).BeginInit();
+            TabPrestamos.SuspendLayout();
+            panelBotonesPrestamos.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)dgvPrestamos).BeginInit();
             SuspendLayout();
             // 
             // TabControl1
@@ -78,6 +92,7 @@
             TabControl1.SelectedIndex = 0;
             TabControl1.Size = new Size(1184, 661);
             TabControl1.TabIndex = 0;
+            TabControl1.SelectedIndexChanged += TabControl1_SelectedIndexChanged;
             // 
             // TabLibros
             // 
@@ -355,6 +370,14 @@
             // 
             // TabPrestamos
             // 
+            TabPrestamos.Controls.Add(dtpFechaDevolucion);
+            TabPrestamos.Controls.Add(cmbLibro);
+            TabPrestamos.Controls.Add(cmbUsuario);
+            TabPrestamos.Controls.Add(lblFechaDevolucion);
+            TabPrestamos.Controls.Add(lblLibroPrestamo);
+            TabPrestamos.Controls.Add(lblUsuarioPrestamo);
+            TabPrestamos.Controls.Add(panelBotonesPrestamos);
+            TabPrestamos.Controls.Add(dgvPrestamos);
             TabPrestamos.Location = new Point(4, 24);
             TabPrestamos.Name = "TabPrestamos";
             TabPrestamos.Padding = new Padding(3);
@@ -362,6 +385,106 @@
             TabPrestamos.TabIndex = 2;
             TabPrestamos.Text = "Préstamos";
             TabPrestamos.UseVisualStyleBackColor = true;
+            // 
+            // dtpFechaDevolucion
+            // 
+            dtpFechaDevolucion.Location = new Point(680, 372);
+            dtpFechaDevolucion.Name = "dtpFechaDevolucion";
+            dtpFechaDevolucion.Size = new Size(215, 23);
+            dtpFechaDevolucion.TabIndex = 8;
+            // 
+            // cmbLibro
+            // 
+            cmbLibro.FormattingEnabled = true;
+            cmbLibro.Location = new Point(382, 370);
+            cmbLibro.Name = "cmbLibro";
+            cmbLibro.Size = new Size(121, 23);
+            cmbLibro.TabIndex = 7;
+            // 
+            // cmbUsuario
+            // 
+            cmbUsuario.FormattingEnabled = true;
+            cmbUsuario.Location = new Point(149, 370);
+            cmbUsuario.Name = "cmbUsuario";
+            cmbUsuario.Size = new Size(121, 23);
+            cmbUsuario.TabIndex = 6;
+            // 
+            // lblFechaDevolucion
+            // 
+            lblFechaDevolucion.AutoSize = true;
+            lblFechaDevolucion.Location = new Point(565, 378);
+            lblFechaDevolucion.Name = "lblFechaDevolucion";
+            lblFechaDevolucion.Size = new Size(109, 15);
+            lblFechaDevolucion.TabIndex = 5;
+            lblFechaDevolucion.Text = "Fecha devolución : ";
+            // 
+            // lblLibroPrestamo
+            // 
+            lblLibroPrestamo.AutoSize = true;
+            lblLibroPrestamo.Location = new Point(338, 378);
+            lblLibroPrestamo.Name = "lblLibroPrestamo";
+            lblLibroPrestamo.Size = new Size(40, 15);
+            lblLibroPrestamo.TabIndex = 4;
+            lblLibroPrestamo.Text = "Libro :";
+            // 
+            // lblUsuarioPrestamo
+            // 
+            lblUsuarioPrestamo.AutoSize = true;
+            lblUsuarioPrestamo.Location = new Point(87, 378);
+            lblUsuarioPrestamo.Name = "lblUsuarioPrestamo";
+            lblUsuarioPrestamo.Size = new Size(56, 15);
+            lblUsuarioPrestamo.TabIndex = 3;
+            lblUsuarioPrestamo.Text = "Usuario : ";
+            // 
+            // panelBotonesPrestamos
+            // 
+            panelBotonesPrestamos.Controls.Add(btnLimpiarPrestamo);
+            panelBotonesPrestamos.Controls.Add(btnDevolverPrestamo);
+            panelBotonesPrestamos.Controls.Add(btnRegistrarPrestamo);
+            panelBotonesPrestamos.Dock = DockStyle.Bottom;
+            panelBotonesPrestamos.Location = new Point(3, 530);
+            panelBotonesPrestamos.Name = "panelBotonesPrestamos";
+            panelBotonesPrestamos.Size = new Size(1170, 100);
+            panelBotonesPrestamos.TabIndex = 2;
+            // 
+            // btnLimpiarPrestamo
+            // 
+            btnLimpiarPrestamo.Location = new Point(322, 34);
+            btnLimpiarPrestamo.Name = "btnLimpiarPrestamo";
+            btnLimpiarPrestamo.Size = new Size(75, 23);
+            btnLimpiarPrestamo.TabIndex = 2;
+            btnLimpiarPrestamo.Text = "Limpiar";
+            btnLimpiarPrestamo.UseVisualStyleBackColor = true;
+            btnLimpiarPrestamo.Click += btnLimpiarPrestamo_Click;
+            // 
+            // btnDevolverPrestamo
+            // 
+            btnDevolverPrestamo.Location = new Point(212, 34);
+            btnDevolverPrestamo.Name = "btnDevolverPrestamo";
+            btnDevolverPrestamo.Size = new Size(75, 23);
+            btnDevolverPrestamo.TabIndex = 1;
+            btnDevolverPrestamo.Text = "Devolver";
+            btnDevolverPrestamo.UseVisualStyleBackColor = true;
+            btnDevolverPrestamo.Click += btnDevolverPrestamo_Click;
+            // 
+            // btnRegistrarPrestamo
+            // 
+            btnRegistrarPrestamo.Location = new Point(106, 34);
+            btnRegistrarPrestamo.Name = "btnRegistrarPrestamo";
+            btnRegistrarPrestamo.Size = new Size(75, 23);
+            btnRegistrarPrestamo.TabIndex = 0;
+            btnRegistrarPrestamo.Text = "Registrar";
+            btnRegistrarPrestamo.UseVisualStyleBackColor = true;
+            btnRegistrarPrestamo.Click += btnRegistrarPrestamo_Click;
+            // 
+            // dgvPrestamos
+            // 
+            dgvPrestamos.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dgvPrestamos.Dock = DockStyle.Top;
+            dgvPrestamos.Location = new Point(3, 3);
+            dgvPrestamos.Name = "dgvPrestamos";
+            dgvPrestamos.Size = new Size(1170, 300);
+            dgvPrestamos.TabIndex = 1;
             // 
             // PrincipalForm
             // 
@@ -382,6 +505,10 @@
             TabUsuarios.PerformLayout();
             panelBotonesUsuarios.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)dgvUsuarios).EndInit();
+            TabPrestamos.ResumeLayout(false);
+            TabPrestamos.PerformLayout();
+            panelBotonesPrestamos.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)dgvPrestamos).EndInit();
             ResumeLayout(false);
         }
 
@@ -417,5 +544,16 @@
         private Button btnEliminarUsuario;
         private Button btnEditarUsuario;
         private Button btnAgregarUsuario;
+        private ComboBox cmbUsuario;
+        private Label lblFechaDevolucion;
+        private Label lblLibroPrestamo;
+        private Label lblUsuarioPrestamo;
+        private Panel panelBotonesPrestamos;
+        private DataGridView dgvPrestamos;
+        private DateTimePicker dtpFechaDevolucion;
+        private ComboBox cmbLibro;
+        private Button btnLimpiarPrestamo;
+        private Button btnDevolverPrestamo;
+        private Button btnRegistrarPrestamo;
     }
 }
