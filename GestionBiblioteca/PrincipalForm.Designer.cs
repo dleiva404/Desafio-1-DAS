@@ -29,24 +29,26 @@
         private void InitializeComponent()
         {
             TabPrestamos = new TabPage();
+            panelPrestamo = new Panel();
             dtpFechaDevolucion = new DateTimePicker();
+            lblUsuarioPrestamo = new Label();
             cmbLibro = new ComboBox();
+            lblLibroPrestamo = new Label();
             cmbUsuario = new ComboBox();
             lblFechaDevolucion = new Label();
-            lblLibroPrestamo = new Label();
-            lblUsuarioPrestamo = new Label();
             panelBotonesPrestamos = new Panel();
             btnLimpiarPrestamo = new Button();
             btnDevolverPrestamo = new Button();
             btnRegistrarPrestamo = new Button();
             dgvPrestamos = new DataGridView();
             TabUsuarios = new TabPage();
-            txtTelefono = new TextBox();
+            panelUsuarios = new Panel();
             txtCorreo = new TextBox();
+            txtTelefono = new TextBox();
+            lblNombre = new Label();
+            lblCorreo = new Label();
             txtNombre = new TextBox();
             lblTelefono = new Label();
-            lblCorreo = new Label();
-            lblNombre = new Label();
             panelBotonesUsuarios = new Panel();
             btnLimpiarUsuario = new Button();
             btnEliminarUsuario = new Button();
@@ -54,14 +56,15 @@
             btnAgregarUsuario = new Button();
             dgvUsuarios = new DataGridView();
             TabLibros = new TabPage();
-            txtAutor = new TextBox();
-            txtAnio = new TextBox();
-            txtGenero = new TextBox();
+            panelCamposLibro = new Panel();
             txtTitulo = new TextBox();
-            lblGenero = new Label();
             lblAnio = new Label();
-            lblAutor = new Label();
+            txtAutor = new TextBox();
+            txtGenero = new TextBox();
             lblTitulo = new Label();
+            lblGenero = new Label();
+            lblAutor = new Label();
+            txtAnio = new TextBox();
             panelBotonesLibros = new Panel();
             btnLimpiarLibro = new Button();
             btnEliminarLibro = new Button();
@@ -74,12 +77,15 @@
             panelGrafico1 = new Panel();
             btnGenerarGraficos = new Button();
             TabPrestamos.SuspendLayout();
+            panelPrestamo.SuspendLayout();
             panelBotonesPrestamos.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dgvPrestamos).BeginInit();
             TabUsuarios.SuspendLayout();
+            panelUsuarios.SuspendLayout();
             panelBotonesUsuarios.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dgvUsuarios).BeginInit();
             TabLibros.SuspendLayout();
+            panelCamposLibro.SuspendLayout();
             panelBotonesLibros.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dgvLibros).BeginInit();
             TabControl1.SuspendLayout();
@@ -88,12 +94,7 @@
             // 
             // TabPrestamos
             // 
-            TabPrestamos.Controls.Add(dtpFechaDevolucion);
-            TabPrestamos.Controls.Add(cmbLibro);
-            TabPrestamos.Controls.Add(cmbUsuario);
-            TabPrestamos.Controls.Add(lblFechaDevolucion);
-            TabPrestamos.Controls.Add(lblLibroPrestamo);
-            TabPrestamos.Controls.Add(lblUsuarioPrestamo);
+            TabPrestamos.Controls.Add(panelPrestamo);
             TabPrestamos.Controls.Add(panelBotonesPrestamos);
             TabPrestamos.Controls.Add(dgvPrestamos);
             TabPrestamos.Location = new Point(4, 24);
@@ -104,55 +105,78 @@
             TabPrestamos.Text = "Préstamos";
             TabPrestamos.UseVisualStyleBackColor = true;
             // 
+            // panelPrestamo
+            // 
+            panelPrestamo.Controls.Add(dtpFechaDevolucion);
+            panelPrestamo.Controls.Add(lblUsuarioPrestamo);
+            panelPrestamo.Controls.Add(cmbLibro);
+            panelPrestamo.Controls.Add(lblLibroPrestamo);
+            panelPrestamo.Controls.Add(cmbUsuario);
+            panelPrestamo.Controls.Add(lblFechaDevolucion);
+            panelPrestamo.Dock = DockStyle.Bottom;
+            panelPrestamo.Location = new Point(3, 409);
+            panelPrestamo.Name = "panelPrestamo";
+            panelPrestamo.Size = new Size(1170, 171);
+            panelPrestamo.TabIndex = 9;
+            // 
             // dtpFechaDevolucion
             // 
-            dtpFechaDevolucion.Location = new Point(680, 372);
+            dtpFechaDevolucion.Font = new Font("Segoe UI", 11F);
+            dtpFechaDevolucion.Location = new Point(137, 119);
             dtpFechaDevolucion.Name = "dtpFechaDevolucion";
-            dtpFechaDevolucion.Size = new Size(215, 23);
+            dtpFechaDevolucion.Size = new Size(288, 27);
             dtpFechaDevolucion.TabIndex = 8;
+            dtpFechaDevolucion.ValueChanged += dtpFechaDevolucion_ValueChanged;
+            // 
+            // lblUsuarioPrestamo
+            // 
+            lblUsuarioPrestamo.AutoSize = true;
+            lblUsuarioPrestamo.Font = new Font("Segoe UI", 11F);
+            lblUsuarioPrestamo.Location = new Point(65, 36);
+            lblUsuarioPrestamo.Name = "lblUsuarioPrestamo";
+            lblUsuarioPrestamo.Size = new Size(70, 20);
+            lblUsuarioPrestamo.TabIndex = 3;
+            lblUsuarioPrestamo.Text = "Usuario : ";
+            lblUsuarioPrestamo.Click += lblUsuarioPrestamo_Click;
             // 
             // cmbLibro
             // 
+            cmbLibro.Font = new Font("Segoe UI", 11F);
             cmbLibro.FormattingEnabled = true;
-            cmbLibro.Location = new Point(382, 370);
+            cmbLibro.Location = new Point(137, 77);
             cmbLibro.Name = "cmbLibro";
-            cmbLibro.Size = new Size(121, 23);
+            cmbLibro.Size = new Size(121, 28);
             cmbLibro.TabIndex = 7;
+            cmbLibro.SelectedIndexChanged += cmbLibro_SelectedIndexChanged;
+            // 
+            // lblLibroPrestamo
+            // 
+            lblLibroPrestamo.AutoSize = true;
+            lblLibroPrestamo.Font = new Font("Segoe UI", 11F);
+            lblLibroPrestamo.Location = new Point(81, 80);
+            lblLibroPrestamo.Name = "lblLibroPrestamo";
+            lblLibroPrestamo.Size = new Size(50, 20);
+            lblLibroPrestamo.TabIndex = 4;
+            lblLibroPrestamo.Text = "Libro :";
             // 
             // cmbUsuario
             // 
+            cmbUsuario.Font = new Font("Segoe UI", 11F);
             cmbUsuario.FormattingEnabled = true;
-            cmbUsuario.Location = new Point(149, 370);
+            cmbUsuario.Location = new Point(137, 33);
             cmbUsuario.Name = "cmbUsuario";
-            cmbUsuario.Size = new Size(121, 23);
+            cmbUsuario.Size = new Size(121, 28);
             cmbUsuario.TabIndex = 6;
             // 
             // lblFechaDevolucion
             // 
             lblFechaDevolucion.AutoSize = true;
-            lblFechaDevolucion.Location = new Point(565, 378);
+            lblFechaDevolucion.Font = new Font("Segoe UI", 11F);
+            lblFechaDevolucion.Location = new Point(69, 124);
             lblFechaDevolucion.Name = "lblFechaDevolucion";
-            lblFechaDevolucion.Size = new Size(50, 15);
+            lblFechaDevolucion.Size = new Size(62, 20);
             lblFechaDevolucion.TabIndex = 5;
             lblFechaDevolucion.Text = "Fecha  : ";
-            // 
-            // lblLibroPrestamo
-            // 
-            lblLibroPrestamo.AutoSize = true;
-            lblLibroPrestamo.Location = new Point(338, 378);
-            lblLibroPrestamo.Name = "lblLibroPrestamo";
-            lblLibroPrestamo.Size = new Size(40, 15);
-            lblLibroPrestamo.TabIndex = 4;
-            lblLibroPrestamo.Text = "Libro :";
-            // 
-            // lblUsuarioPrestamo
-            // 
-            lblUsuarioPrestamo.AutoSize = true;
-            lblUsuarioPrestamo.Location = new Point(87, 378);
-            lblUsuarioPrestamo.Name = "lblUsuarioPrestamo";
-            lblUsuarioPrestamo.Size = new Size(56, 15);
-            lblUsuarioPrestamo.TabIndex = 3;
-            lblUsuarioPrestamo.Text = "Usuario : ";
             // 
             // panelBotonesPrestamos
             // 
@@ -160,16 +184,17 @@
             panelBotonesPrestamos.Controls.Add(btnDevolverPrestamo);
             panelBotonesPrestamos.Controls.Add(btnRegistrarPrestamo);
             panelBotonesPrestamos.Dock = DockStyle.Bottom;
-            panelBotonesPrestamos.Location = new Point(3, 530);
+            panelBotonesPrestamos.Location = new Point(3, 580);
             panelBotonesPrestamos.Name = "panelBotonesPrestamos";
-            panelBotonesPrestamos.Size = new Size(1170, 100);
+            panelBotonesPrestamos.Size = new Size(1170, 50);
             panelBotonesPrestamos.TabIndex = 2;
             // 
             // btnLimpiarPrestamo
             // 
-            btnLimpiarPrestamo.Location = new Point(322, 34);
+            btnLimpiarPrestamo.Font = new Font("Segoe UI", 11F);
+            btnLimpiarPrestamo.Location = new Point(217, 10);
             btnLimpiarPrestamo.Name = "btnLimpiarPrestamo";
-            btnLimpiarPrestamo.Size = new Size(75, 23);
+            btnLimpiarPrestamo.Size = new Size(100, 35);
             btnLimpiarPrestamo.TabIndex = 2;
             btnLimpiarPrestamo.Text = "Limpiar";
             btnLimpiarPrestamo.UseVisualStyleBackColor = true;
@@ -177,9 +202,10 @@
             // 
             // btnDevolverPrestamo
             // 
-            btnDevolverPrestamo.Location = new Point(212, 34);
+            btnDevolverPrestamo.Font = new Font("Segoe UI", 11F);
+            btnDevolverPrestamo.Location = new Point(111, 10);
             btnDevolverPrestamo.Name = "btnDevolverPrestamo";
-            btnDevolverPrestamo.Size = new Size(75, 23);
+            btnDevolverPrestamo.Size = new Size(100, 35);
             btnDevolverPrestamo.TabIndex = 1;
             btnDevolverPrestamo.Text = "Devolver";
             btnDevolverPrestamo.UseVisualStyleBackColor = true;
@@ -187,9 +213,10 @@
             // 
             // btnRegistrarPrestamo
             // 
-            btnRegistrarPrestamo.Location = new Point(106, 34);
+            btnRegistrarPrestamo.Font = new Font("Segoe UI", 11F);
+            btnRegistrarPrestamo.Location = new Point(5, 10);
             btnRegistrarPrestamo.Name = "btnRegistrarPrestamo";
-            btnRegistrarPrestamo.Size = new Size(75, 23);
+            btnRegistrarPrestamo.Size = new Size(100, 35);
             btnRegistrarPrestamo.TabIndex = 0;
             btnRegistrarPrestamo.Text = "Registrar";
             btnRegistrarPrestamo.UseVisualStyleBackColor = true;
@@ -197,8 +224,8 @@
             // 
             // dgvPrestamos
             // 
+            dgvPrestamos.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             dgvPrestamos.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgvPrestamos.Dock = DockStyle.Top;
             dgvPrestamos.Location = new Point(3, 3);
             dgvPrestamos.Name = "dgvPrestamos";
             dgvPrestamos.Size = new Size(1170, 300);
@@ -206,12 +233,7 @@
             // 
             // TabUsuarios
             // 
-            TabUsuarios.Controls.Add(txtTelefono);
-            TabUsuarios.Controls.Add(txtCorreo);
-            TabUsuarios.Controls.Add(txtNombre);
-            TabUsuarios.Controls.Add(lblTelefono);
-            TabUsuarios.Controls.Add(lblCorreo);
-            TabUsuarios.Controls.Add(lblNombre);
+            TabUsuarios.Controls.Add(panelUsuarios);
             TabUsuarios.Controls.Add(panelBotonesUsuarios);
             TabUsuarios.Controls.Add(dgvUsuarios);
             TabUsuarios.Location = new Point(4, 24);
@@ -222,53 +244,77 @@
             TabUsuarios.Text = "Usuarios";
             TabUsuarios.UseVisualStyleBackColor = true;
             // 
-            // txtTelefono
+            // panelUsuarios
             // 
-            txtTelefono.Location = new Point(638, 380);
-            txtTelefono.Name = "txtTelefono";
-            txtTelefono.Size = new Size(100, 23);
-            txtTelefono.TabIndex = 7;
+            panelUsuarios.Controls.Add(txtCorreo);
+            panelUsuarios.Controls.Add(txtTelefono);
+            panelUsuarios.Controls.Add(lblNombre);
+            panelUsuarios.Controls.Add(lblCorreo);
+            panelUsuarios.Controls.Add(txtNombre);
+            panelUsuarios.Controls.Add(lblTelefono);
+            panelUsuarios.Dock = DockStyle.Bottom;
+            panelUsuarios.Location = new Point(3, 409);
+            panelUsuarios.Name = "panelUsuarios";
+            panelUsuarios.Size = new Size(1170, 171);
+            panelUsuarios.TabIndex = 8;
+            panelUsuarios.Paint += panel1_Paint;
             // 
             // txtCorreo
             // 
-            txtCorreo.Location = new Point(353, 380);
+            txtCorreo.Anchor = AnchorStyles.Left | AnchorStyles.Right;
+            txtCorreo.Location = new Point(127, 66);
             txtCorreo.Name = "txtCorreo";
             txtCorreo.Size = new Size(100, 23);
             txtCorreo.TabIndex = 6;
+            txtCorreo.TextChanged += txtCorreo_TextChanged;
             // 
-            // txtNombre
+            // txtTelefono
             // 
-            txtNombre.Location = new Point(126, 380);
-            txtNombre.Name = "txtNombre";
-            txtNombre.Size = new Size(100, 23);
-            txtNombre.TabIndex = 5;
-            // 
-            // lblTelefono
-            // 
-            lblTelefono.AutoSize = true;
-            lblTelefono.Location = new Point(570, 388);
-            lblTelefono.Name = "lblTelefono";
-            lblTelefono.Size = new Size(62, 15);
-            lblTelefono.TabIndex = 4;
-            lblTelefono.Text = "Teléfono : ";
-            // 
-            // lblCorreo
-            // 
-            lblCorreo.AutoSize = true;
-            lblCorreo.Location = new Point(295, 388);
-            lblCorreo.Name = "lblCorreo";
-            lblCorreo.Size = new Size(52, 15);
-            lblCorreo.TabIndex = 3;
-            lblCorreo.Text = "Correo : ";
+            txtTelefono.Anchor = AnchorStyles.Left | AnchorStyles.Right;
+            txtTelefono.Location = new Point(127, 107);
+            txtTelefono.Name = "txtTelefono";
+            txtTelefono.Size = new Size(100, 23);
+            txtTelefono.TabIndex = 7;
+            txtTelefono.TextChanged += txtTelefono_TextChanged;
             // 
             // lblNombre
             // 
             lblNombre.AutoSize = true;
-            lblNombre.Location = new Point(63, 388);
+            lblNombre.Font = new Font("Segoe UI", 11F);
+            lblNombre.Location = new Point(50, 29);
             lblNombre.Name = "lblNombre";
-            lblNombre.Size = new Size(57, 15);
+            lblNombre.Size = new Size(71, 20);
             lblNombre.TabIndex = 2;
             lblNombre.Text = "Nombre :";
+            // 
+            // lblCorreo
+            // 
+            lblCorreo.AutoSize = true;
+            lblCorreo.Font = new Font("Segoe UI", 11F);
+            lblCorreo.Location = new Point(55, 69);
+            lblCorreo.Name = "lblCorreo";
+            lblCorreo.Size = new Size(65, 20);
+            lblCorreo.TabIndex = 3;
+            lblCorreo.Text = "Correo : ";
+            // 
+            // txtNombre
+            // 
+            txtNombre.Anchor = AnchorStyles.Left | AnchorStyles.Right;
+            txtNombre.Location = new Point(127, 26);
+            txtNombre.Name = "txtNombre";
+            txtNombre.Size = new Size(100, 23);
+            txtNombre.TabIndex = 5;
+            txtNombre.TextChanged += txtNombre_TextChanged;
+            // 
+            // lblTelefono
+            // 
+            lblTelefono.AutoSize = true;
+            lblTelefono.Font = new Font("Segoe UI", 11F);
+            lblTelefono.Location = new Point(45, 110);
+            lblTelefono.Name = "lblTelefono";
+            lblTelefono.Size = new Size(78, 20);
+            lblTelefono.TabIndex = 4;
+            lblTelefono.Text = "Teléfono : ";
             // 
             // panelBotonesUsuarios
             // 
@@ -277,16 +323,17 @@
             panelBotonesUsuarios.Controls.Add(btnEditarUsuario);
             panelBotonesUsuarios.Controls.Add(btnAgregarUsuario);
             panelBotonesUsuarios.Dock = DockStyle.Bottom;
-            panelBotonesUsuarios.Location = new Point(3, 530);
+            panelBotonesUsuarios.Location = new Point(3, 580);
             panelBotonesUsuarios.Name = "panelBotonesUsuarios";
-            panelBotonesUsuarios.Size = new Size(1170, 100);
+            panelBotonesUsuarios.Size = new Size(1170, 50);
             panelBotonesUsuarios.TabIndex = 1;
             // 
             // btnLimpiarUsuario
             // 
-            btnLimpiarUsuario.Location = new Point(518, 30);
+            btnLimpiarUsuario.Font = new Font("Segoe UI", 11F);
+            btnLimpiarUsuario.Location = new Point(323, 10);
             btnLimpiarUsuario.Name = "btnLimpiarUsuario";
-            btnLimpiarUsuario.Size = new Size(75, 23);
+            btnLimpiarUsuario.Size = new Size(100, 35);
             btnLimpiarUsuario.TabIndex = 11;
             btnLimpiarUsuario.Text = "Limpiar";
             btnLimpiarUsuario.UseVisualStyleBackColor = true;
@@ -294,9 +341,10 @@
             // 
             // btnEliminarUsuario
             // 
-            btnEliminarUsuario.Location = new Point(375, 30);
+            btnEliminarUsuario.Font = new Font("Segoe UI", 11F);
+            btnEliminarUsuario.Location = new Point(217, 10);
             btnEliminarUsuario.Name = "btnEliminarUsuario";
-            btnEliminarUsuario.Size = new Size(75, 23);
+            btnEliminarUsuario.Size = new Size(100, 35);
             btnEliminarUsuario.TabIndex = 10;
             btnEliminarUsuario.Text = "Eliminar";
             btnEliminarUsuario.UseVisualStyleBackColor = true;
@@ -304,9 +352,10 @@
             // 
             // btnEditarUsuario
             // 
-            btnEditarUsuario.Location = new Point(233, 30);
+            btnEditarUsuario.Font = new Font("Segoe UI", 11F);
+            btnEditarUsuario.Location = new Point(111, 10);
             btnEditarUsuario.Name = "btnEditarUsuario";
-            btnEditarUsuario.Size = new Size(75, 23);
+            btnEditarUsuario.Size = new Size(100, 35);
             btnEditarUsuario.TabIndex = 9;
             btnEditarUsuario.Text = "Editar";
             btnEditarUsuario.UseVisualStyleBackColor = true;
@@ -314,9 +363,10 @@
             // 
             // btnAgregarUsuario
             // 
-            btnAgregarUsuario.Location = new Point(90, 30);
+            btnAgregarUsuario.Font = new Font("Segoe UI", 11F);
+            btnAgregarUsuario.Location = new Point(5, 10);
             btnAgregarUsuario.Name = "btnAgregarUsuario";
-            btnAgregarUsuario.Size = new Size(75, 23);
+            btnAgregarUsuario.Size = new Size(100, 35);
             btnAgregarUsuario.TabIndex = 8;
             btnAgregarUsuario.Text = "Agregar";
             btnAgregarUsuario.UseVisualStyleBackColor = true;
@@ -324,8 +374,8 @@
             // 
             // dgvUsuarios
             // 
+            dgvUsuarios.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             dgvUsuarios.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgvUsuarios.Dock = DockStyle.Top;
             dgvUsuarios.Location = new Point(3, 3);
             dgvUsuarios.Name = "dgvUsuarios";
             dgvUsuarios.Size = new Size(1170, 300);
@@ -334,14 +384,7 @@
             // 
             // TabLibros
             // 
-            TabLibros.Controls.Add(txtAutor);
-            TabLibros.Controls.Add(txtAnio);
-            TabLibros.Controls.Add(txtGenero);
-            TabLibros.Controls.Add(txtTitulo);
-            TabLibros.Controls.Add(lblGenero);
-            TabLibros.Controls.Add(lblAnio);
-            TabLibros.Controls.Add(lblAutor);
-            TabLibros.Controls.Add(lblTitulo);
+            TabLibros.Controls.Add(panelCamposLibro);
             TabLibros.Controls.Add(panelBotonesLibros);
             TabLibros.Controls.Add(dgvLibros);
             TabLibros.Location = new Point(4, 24);
@@ -352,69 +395,97 @@
             TabLibros.Text = "Libros";
             TabLibros.UseVisualStyleBackColor = true;
             // 
+            // panelCamposLibro
+            // 
+            panelCamposLibro.Controls.Add(txtTitulo);
+            panelCamposLibro.Controls.Add(lblAnio);
+            panelCamposLibro.Controls.Add(txtAutor);
+            panelCamposLibro.Controls.Add(txtGenero);
+            panelCamposLibro.Controls.Add(lblTitulo);
+            panelCamposLibro.Controls.Add(lblGenero);
+            panelCamposLibro.Controls.Add(lblAutor);
+            panelCamposLibro.Controls.Add(txtAnio);
+            panelCamposLibro.Dock = DockStyle.Bottom;
+            panelCamposLibro.Location = new Point(3, 409);
+            panelCamposLibro.Name = "panelCamposLibro";
+            panelCamposLibro.Size = new Size(1170, 171);
+            panelCamposLibro.TabIndex = 7;
+            // 
+            // txtTitulo
+            // 
+            txtTitulo.Anchor = AnchorStyles.Left | AnchorStyles.Right;
+            txtTitulo.Location = new Point(111, 18);
+            txtTitulo.Name = "txtTitulo";
+            txtTitulo.Size = new Size(280, 23);
+            txtTitulo.TabIndex = 3;
+            // 
+            // lblAnio
+            // 
+            lblAnio.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
+            lblAnio.AutoSize = true;
+            lblAnio.Font = new Font("Segoe UI", 11F);
+            lblAnio.Location = new Point(62, 89);
+            lblAnio.Name = "lblAnio";
+            lblAnio.Size = new Size(43, 20);
+            lblAnio.TabIndex = 4;
+            lblAnio.Text = "Año :";
+            // 
             // txtAutor
             // 
-            txtAutor.Location = new Point(338, 357);
+            txtAutor.Anchor = AnchorStyles.Left | AnchorStyles.Right;
+            txtAutor.Location = new Point(111, 53);
             txtAutor.Name = "txtAutor";
-            txtAutor.Size = new Size(100, 23);
+            txtAutor.Size = new Size(280, 23);
             txtAutor.TabIndex = 4;
-            // 
-            // txtAnio
-            // 
-            txtAnio.Location = new Point(541, 357);
-            txtAnio.Name = "txtAnio";
-            txtAnio.Size = new Size(100, 23);
-            txtAnio.TabIndex = 5;
             // 
             // txtGenero
             // 
-            txtGenero.Location = new Point(752, 357);
+            txtGenero.Anchor = AnchorStyles.Left | AnchorStyles.Right;
+            txtGenero.Location = new Point(111, 124);
             txtGenero.Name = "txtGenero";
             txtGenero.Size = new Size(100, 23);
             txtGenero.TabIndex = 6;
             // 
-            // txtTitulo
+            // lblTitulo
             // 
-            txtTitulo.Location = new Point(117, 357);
-            txtTitulo.Name = "txtTitulo";
-            txtTitulo.Size = new Size(100, 23);
-            txtTitulo.TabIndex = 3;
+            lblTitulo.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
+            lblTitulo.AutoSize = true;
+            lblTitulo.Font = new Font("Segoe UI", 11F);
+            lblTitulo.Location = new Point(51, 17);
+            lblTitulo.Name = "lblTitulo";
+            lblTitulo.Size = new Size(54, 20);
+            lblTitulo.TabIndex = 2;
+            lblTitulo.Text = "Título :";
             // 
             // lblGenero
             // 
+            lblGenero.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
             lblGenero.AutoSize = true;
-            lblGenero.Location = new Point(692, 365);
+            lblGenero.Font = new Font("Segoe UI", 11F);
+            lblGenero.Location = new Point(41, 123);
             lblGenero.Name = "lblGenero";
-            lblGenero.Size = new Size(54, 15);
+            lblGenero.Size = new Size(68, 20);
             lblGenero.TabIndex = 5;
             lblGenero.Text = "Género : ";
             // 
-            // lblAnio
-            // 
-            lblAnio.AutoSize = true;
-            lblAnio.Location = new Point(500, 365);
-            lblAnio.Name = "lblAnio";
-            lblAnio.Size = new Size(35, 15);
-            lblAnio.TabIndex = 4;
-            lblAnio.Text = "Año :";
-            // 
             // lblAutor
             // 
+            lblAutor.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
             lblAutor.AutoSize = true;
-            lblAutor.Location = new Point(289, 365);
+            lblAutor.Font = new Font("Segoe UI", 11F);
+            lblAutor.Location = new Point(52, 53);
             lblAutor.Name = "lblAutor";
-            lblAutor.Size = new Size(43, 15);
+            lblAutor.Size = new Size(53, 20);
             lblAutor.TabIndex = 3;
             lblAutor.Text = "Autor :";
             // 
-            // lblTitulo
+            // txtAnio
             // 
-            lblTitulo.AutoSize = true;
-            lblTitulo.Location = new Point(67, 365);
-            lblTitulo.Name = "lblTitulo";
-            lblTitulo.Size = new Size(44, 15);
-            lblTitulo.TabIndex = 2;
-            lblTitulo.Text = "Título :";
+            txtAnio.Anchor = AnchorStyles.Left | AnchorStyles.Right;
+            txtAnio.Location = new Point(111, 89);
+            txtAnio.Name = "txtAnio";
+            txtAnio.Size = new Size(100, 23);
+            txtAnio.TabIndex = 5;
             // 
             // panelBotonesLibros
             // 
@@ -423,16 +494,18 @@
             panelBotonesLibros.Controls.Add(btnEditarLibro);
             panelBotonesLibros.Controls.Add(btnAgregarLibro);
             panelBotonesLibros.Dock = DockStyle.Bottom;
-            panelBotonesLibros.Location = new Point(3, 480);
+            panelBotonesLibros.Location = new Point(3, 580);
             panelBotonesLibros.Name = "panelBotonesLibros";
-            panelBotonesLibros.Size = new Size(1170, 150);
+            panelBotonesLibros.Size = new Size(1170, 50);
             panelBotonesLibros.TabIndex = 6;
             // 
             // btnLimpiarLibro
             // 
-            btnLimpiarLibro.Location = new Point(436, 64);
+            btnLimpiarLibro.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
+            btnLimpiarLibro.Font = new Font("Segoe UI", 11F);
+            btnLimpiarLibro.Location = new Point(323, 11);
             btnLimpiarLibro.Name = "btnLimpiarLibro";
-            btnLimpiarLibro.Size = new Size(75, 23);
+            btnLimpiarLibro.Size = new Size(100, 35);
             btnLimpiarLibro.TabIndex = 3;
             btnLimpiarLibro.Text = "Limpiar";
             btnLimpiarLibro.UseVisualStyleBackColor = true;
@@ -440,9 +513,11 @@
             // 
             // btnEliminarLibro
             // 
-            btnEliminarLibro.Location = new Point(321, 64);
+            btnEliminarLibro.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
+            btnEliminarLibro.Font = new Font("Segoe UI", 11F);
+            btnEliminarLibro.Location = new Point(217, 10);
             btnEliminarLibro.Name = "btnEliminarLibro";
-            btnEliminarLibro.Size = new Size(75, 23);
+            btnEliminarLibro.Size = new Size(100, 35);
             btnEliminarLibro.TabIndex = 3;
             btnEliminarLibro.Text = "Eliminar";
             btnEliminarLibro.UseVisualStyleBackColor = true;
@@ -450,9 +525,11 @@
             // 
             // btnEditarLibro
             // 
-            btnEditarLibro.Location = new Point(210, 64);
+            btnEditarLibro.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
+            btnEditarLibro.Font = new Font("Segoe UI", 11F);
+            btnEditarLibro.Location = new Point(111, 10);
             btnEditarLibro.Name = "btnEditarLibro";
-            btnEditarLibro.Size = new Size(75, 23);
+            btnEditarLibro.Size = new Size(100, 35);
             btnEditarLibro.TabIndex = 2;
             btnEditarLibro.Text = "Editar";
             btnEditarLibro.UseVisualStyleBackColor = true;
@@ -460,9 +537,11 @@
             // 
             // btnAgregarLibro
             // 
-            btnAgregarLibro.Location = new Point(95, 64);
+            btnAgregarLibro.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
+            btnAgregarLibro.Font = new Font("Segoe UI", 11F);
+            btnAgregarLibro.Location = new Point(5, 10);
             btnAgregarLibro.Name = "btnAgregarLibro";
-            btnAgregarLibro.Size = new Size(75, 23);
+            btnAgregarLibro.Size = new Size(100, 35);
             btnAgregarLibro.TabIndex = 1;
             btnAgregarLibro.Text = "Agregar";
             btnAgregarLibro.UseVisualStyleBackColor = true;
@@ -470,8 +549,8 @@
             // 
             // dgvLibros
             // 
+            dgvLibros.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             dgvLibros.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgvLibros.Dock = DockStyle.Top;
             dgvLibros.Location = new Point(3, 3);
             dgvLibros.Name = "dgvLibros";
             dgvLibros.Size = new Size(1170, 300);
@@ -543,15 +622,18 @@
             Text = "Gestión de Biblioteca - UDB";
             WindowState = FormWindowState.Maximized;
             TabPrestamos.ResumeLayout(false);
-            TabPrestamos.PerformLayout();
+            panelPrestamo.ResumeLayout(false);
+            panelPrestamo.PerformLayout();
             panelBotonesPrestamos.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)dgvPrestamos).EndInit();
             TabUsuarios.ResumeLayout(false);
-            TabUsuarios.PerformLayout();
+            panelUsuarios.ResumeLayout(false);
+            panelUsuarios.PerformLayout();
             panelBotonesUsuarios.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)dgvUsuarios).EndInit();
             TabLibros.ResumeLayout(false);
-            TabLibros.PerformLayout();
+            panelCamposLibro.ResumeLayout(false);
+            panelCamposLibro.PerformLayout();
             panelBotonesLibros.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)dgvLibros).EndInit();
             TabControl1.ResumeLayout(false);
@@ -605,5 +687,8 @@
         private Panel panelGrafico1;
         private Button btnGenerarGraficos;
         private Panel panelGrafico2;
+        private Panel panelCamposLibro;
+        private Panel panelUsuarios;
+        private Panel panelPrestamo;
     }
 }
