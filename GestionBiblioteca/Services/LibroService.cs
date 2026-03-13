@@ -7,26 +7,22 @@ namespace GestionBiblioteca.Services
         private List<Libro> _libros = new List<Libro>();
         private int _nextId = 1;
 
-        // Agregar libro
         public void Agregar(string titulo, string autor, int anio, string genero)
         {
             var libro = new Libro(_nextId++, titulo, autor, anio, genero);
             _libros.Add(libro);
         }
 
-        // Obtener todos
         public List<Libro> ObtenerTodos()
         {
             return _libros;
         }
 
-        // Buscar por ID
         public Libro BuscarPorId(int id)
         {
-            return _libros.FirstOrDefault(l => l.Id == id);
+            return _libros.FirstOrDefault(l => l.Id == id)!;
         }
 
-        // Actualizar libro
         public bool Actualizar(int id, string titulo, string autor, int anio, string genero)
         {
             var libro = BuscarPorId(id);
@@ -38,7 +34,6 @@ namespace GestionBiblioteca.Services
             return true;
         }
 
-        // Eliminar libro
         public bool Eliminar(int id)
         {
             var libro = BuscarPorId(id);

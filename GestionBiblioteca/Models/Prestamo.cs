@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace GestionBiblioteca.Models
+﻿namespace GestionBiblioteca.Models
 {
     public class Prestamo
     {
@@ -12,8 +6,9 @@ namespace GestionBiblioteca.Models
         public Libro Libro { get; set; }
         public Usuario Usuario { get; set; }
         public DateTime FechaPrestamo { get; set; }
-        public DateTime? FechaDevolucion { get; set; }
+        public DateTime FechaDevolucion { get; set; }
         public bool Devuelto { get; set; }
+
         public Prestamo(int id, Libro libro, Usuario usuario, DateTime fechaDevolucion)
         {
             Id = id;
@@ -23,6 +18,7 @@ namespace GestionBiblioteca.Models
             FechaDevolucion = fechaDevolucion;
             Devuelto = false;
         }
+
         public override string ToString()
         {
             return $"{Id} | {Libro.Titulo} | {Usuario.Nombre} | {FechaPrestamo:dd/MM/yyyy} | {(Devuelto ? "Devuelto" : "Pendiente")}";

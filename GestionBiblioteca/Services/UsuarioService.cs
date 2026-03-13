@@ -7,10 +7,8 @@ namespace GestionBiblioteca.Services
         private List<Usuario> _usuarios = new List<Usuario>();
         private int _nextId = 1;
 
-        // Agregar usuario
         public void Agregar(string nombre, string correo, string telefono)
         {
-            // Validar duplicado de correo
             if (_usuarios.Any(u => u.Correo == correo))
                 throw new Exception("Ya existe un usuario con ese correo.");
 
@@ -18,19 +16,16 @@ namespace GestionBiblioteca.Services
             _usuarios.Add(usuario);
         }
 
-        // Obtener todos
         public List<Usuario> ObtenerTodos()
         {
             return _usuarios;
         }
 
-        // Buscar por ID
         public Usuario BuscarPorId(int id)
         {
             return _usuarios.FirstOrDefault(u => u.Id == id)!;
         }
 
-        // Actualizar usuario
         public bool Actualizar(int id, string nombre, string correo, string telefono)
         {
             var usuario = BuscarPorId(id);
@@ -41,7 +36,6 @@ namespace GestionBiblioteca.Services
             return true;
         }
 
-        // Eliminar usuario
         public bool Eliminar(int id)
         {
             var usuario = BuscarPorId(id);

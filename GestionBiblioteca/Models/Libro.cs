@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace GestionBiblioteca.Models
+﻿namespace GestionBiblioteca.Models
 {
     public class Libro
     {
@@ -14,7 +8,7 @@ namespace GestionBiblioteca.Models
         public int Anio { get; set; }
         public string Genero { get; set; }
         public bool Disponible { get; set; }
-        
+
         public Libro(int id, string titulo, string autor, int anio, string genero)
         {
             Id = id;
@@ -22,7 +16,7 @@ namespace GestionBiblioteca.Models
             Autor = autor;
             Anio = anio;
             Genero = genero;
-            Disponible = true; 
+            Disponible = true;
         }
 
         public override string ToString()
