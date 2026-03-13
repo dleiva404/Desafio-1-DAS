@@ -21,19 +21,33 @@ namespace GestionBiblioteca
             this.MinimumSize = new Size(800, 600);
             this.WindowState = FormWindowState.Maximized;
             AplicarEstilo();
+
+            // ? Fix fila vacía en todos los DataGridViews
+            dgvLibros.AllowUserToAddRows = false;
+            dgvUsuarios.AllowUserToAddRows = false;
+            dgvPrestamos.AllowUserToAddRows = false;
+
+            // ? Fix Anchor por código para que no lo sobreescriba el Designer
+            dgvUsuarios.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right | AnchorStyles.Bottom;
+            dgvPrestamos.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right | AnchorStyles.Bottom;
+            dgvUsuarios.Height = panelUsuarios.Top - dgvUsuarios.Top - 5;
+            dgvPrestamos.Height = panelPrestamo.Top - dgvPrestamos.Top - 5;
+
             CargarLibros();
             CargarUsuarios();
             CargarPrestamos();
             dtpFechaDevolucion.Value = DateTime.Now.AddDays(7);
             dtpFechaDevolucion.MinDate = DateTime.Now.AddDays(1);
+
             this.Resize += PrincipalForm_Resize;
         }
 
+        // ? Resize corregido usando altura real del TabControl
         private void PrincipalForm_Resize(object sender, EventArgs e)
         {
-            int alturaFormulario = TabLibros.Height;
-            int alturaCampos = 130;
-            int alturaTabla = alturaFormulario - alturaCampos - 10;
+            int alturaDisponible = TabControl1.Height - TabControl1.ItemSize.Height - 4;
+            int alturaPanelCampos = 160;
+            int alturaTabla = alturaDisponible - alturaPanelCampos - panelBotonesLibros.Height - 10;
 
             if (alturaTabla > 50)
             {
@@ -42,23 +56,27 @@ namespace GestionBiblioteca
                 dgvPrestamos.Height = alturaTabla;
             }
 
-            // Ajustar ancho de TextBoxes al ancho de la ventana
-            int anchoTexto = (this.Width - 200) / 4;
-            if (anchoTexto > 100)
-            {
-                txtTitulo.Width = anchoTexto;
-                txtAutor.Width = anchoTexto;
-                txtAnio.Width = anchoTexto / 2;
-                txtGenero.Width = anchoTexto;
-                txtNombre.Width = anchoTexto;
-                txtCorreo.Width = anchoTexto;
-                txtTelefono.Width = anchoTexto;
-            }
+            int anchoTexto = Math.Max(150, (this.Width - 300) / 3);
+            txtTitulo.Width = anchoTexto;
+            txtAutor.Width = anchoTexto;
+            txtAnio.Width = anchoTexto / 2;
+            txtGenero.Width = anchoTexto;
+            txtNombre.Width = anchoTexto;
+            txtCorreo.Width = anchoTexto;
+            txtTelefono.Width = anchoTexto;
+
+            foreach (Control c in panelUsuarios.Controls)
+                if (c is TextBox tx) { tx.BackColor = Color.White; tx.ForeColor = Color.Black; }
+
+            foreach (Control c in panelCamposLibro.Controls)
+                if (c is TextBox tx) { tx.BackColor = Color.White; tx.ForeColor = Color.Black; }
+
+            foreach (Control c in panelPrestamo.Controls)
+                if (c is TextBox tx) { tx.BackColor = Color.White; tx.ForeColor = Color.Black; }
         }
 
         private void AplicarEstilo()
         {
-            // Colores UDB El Salvador
             Color azulUDB = Color.FromArgb(0, 51, 153);
             Color amarilloUDB = Color.FromArgb(255, 204, 0);
             Color blancoUDB = Color.White;
@@ -68,99 +86,68 @@ namespace GestionBiblioteca
             this.BackColor = grisClaro;
             this.Font = new Font("Segoe UI", 9);
 
-            // Botones Libros
             foreach (Button b in new Button[] { btnAgregarLibro, btnEditarLibro })
             {
-                b.Width = 100;
-                b.Height = 35;
-                b.BackColor = azulUDB;
-                b.ForeColor = blancoUDB;
-                b.FlatStyle = FlatStyle.Flat;
-                b.FlatAppearance.BorderSize = 0;
+                b.Width = 100; b.Height = 35;
+                b.BackColor = azulUDB; b.ForeColor = blancoUDB;
+                b.FlatStyle = FlatStyle.Flat; b.FlatAppearance.BorderSize = 0;
                 b.Font = new Font("Segoe UI", 9, FontStyle.Bold);
                 b.Cursor = Cursors.Hand;
             }
 
-            btnEliminarLibro.Width = 100;
-            btnEliminarLibro.Height = 35;
-            btnEliminarLibro.BackColor = rojoUDB;
-            btnEliminarLibro.ForeColor = blancoUDB;
-            btnEliminarLibro.FlatStyle = FlatStyle.Flat;
-            btnEliminarLibro.FlatAppearance.BorderSize = 0;
+            btnEliminarLibro.Width = 100; btnEliminarLibro.Height = 35;
+            btnEliminarLibro.BackColor = rojoUDB; btnEliminarLibro.ForeColor = blancoUDB;
+            btnEliminarLibro.FlatStyle = FlatStyle.Flat; btnEliminarLibro.FlatAppearance.BorderSize = 0;
             btnEliminarLibro.Font = new Font("Segoe UI", 9, FontStyle.Bold);
             btnEliminarLibro.Cursor = Cursors.Hand;
 
-            btnLimpiarLibro.Width = 100;
-            btnLimpiarLibro.Height = 35;
-            btnLimpiarLibro.BackColor = amarilloUDB;
-            btnLimpiarLibro.ForeColor = azulUDB;
-            btnLimpiarLibro.FlatStyle = FlatStyle.Flat;
-            btnLimpiarLibro.FlatAppearance.BorderSize = 0;
+            btnLimpiarLibro.Width = 100; btnLimpiarLibro.Height = 35;
+            btnLimpiarLibro.BackColor = amarilloUDB; btnLimpiarLibro.ForeColor = azulUDB;
+            btnLimpiarLibro.FlatStyle = FlatStyle.Flat; btnLimpiarLibro.FlatAppearance.BorderSize = 0;
             btnLimpiarLibro.Font = new Font("Segoe UI", 9, FontStyle.Bold);
             btnLimpiarLibro.Cursor = Cursors.Hand;
 
-            // Botones Usuarios
             foreach (Button b in new Button[] { btnAgregarUsuario, btnEditarUsuario })
             {
-                b.Width = 100;
-                b.Height = 35;
-                b.BackColor = azulUDB;
-                b.ForeColor = blancoUDB;
-                b.FlatStyle = FlatStyle.Flat;
-                b.FlatAppearance.BorderSize = 0;
+                b.Width = 100; b.Height = 35;
+                b.BackColor = azulUDB; b.ForeColor = blancoUDB;
+                b.FlatStyle = FlatStyle.Flat; b.FlatAppearance.BorderSize = 0;
                 b.Font = new Font("Segoe UI", 9, FontStyle.Bold);
                 b.Cursor = Cursors.Hand;
             }
 
-            btnEliminarUsuario.Width = 100;
-            btnEliminarUsuario.Height = 35;
-            btnEliminarUsuario.BackColor = rojoUDB;
-            btnEliminarUsuario.ForeColor = blancoUDB;
-            btnEliminarUsuario.FlatStyle = FlatStyle.Flat;
-            btnEliminarUsuario.FlatAppearance.BorderSize = 0;
+            btnEliminarUsuario.Width = 100; btnEliminarUsuario.Height = 35;
+            btnEliminarUsuario.BackColor = rojoUDB; btnEliminarUsuario.ForeColor = blancoUDB;
+            btnEliminarUsuario.FlatStyle = FlatStyle.Flat; btnEliminarUsuario.FlatAppearance.BorderSize = 0;
             btnEliminarUsuario.Font = new Font("Segoe UI", 9, FontStyle.Bold);
             btnEliminarUsuario.Cursor = Cursors.Hand;
 
-            btnLimpiarUsuario.Width = 100;
-            btnLimpiarUsuario.Height = 35;
-            btnLimpiarUsuario.BackColor = amarilloUDB;
-            btnLimpiarUsuario.ForeColor = azulUDB;
-            btnLimpiarUsuario.FlatStyle = FlatStyle.Flat;
-            btnLimpiarUsuario.FlatAppearance.BorderSize = 0;
+            btnLimpiarUsuario.Width = 100; btnLimpiarUsuario.Height = 35;
+            btnLimpiarUsuario.BackColor = amarilloUDB; btnLimpiarUsuario.ForeColor = azulUDB;
+            btnLimpiarUsuario.FlatStyle = FlatStyle.Flat; btnLimpiarUsuario.FlatAppearance.BorderSize = 0;
             btnLimpiarUsuario.Font = new Font("Segoe UI", 9, FontStyle.Bold);
             btnLimpiarUsuario.Cursor = Cursors.Hand;
 
-            // Botones Préstamos
             foreach (Button b in new Button[] { btnRegistrarPrestamo, btnDevolverPrestamo })
             {
-                b.Width = 100;
-                b.Height = 35;
-                b.BackColor = azulUDB;
-                b.ForeColor = blancoUDB;
-                b.FlatStyle = FlatStyle.Flat;
-                b.FlatAppearance.BorderSize = 0;
+                b.Width = 100; b.Height = 35;
+                b.BackColor = azulUDB; b.ForeColor = blancoUDB;
+                b.FlatStyle = FlatStyle.Flat; b.FlatAppearance.BorderSize = 0;
                 b.Font = new Font("Segoe UI", 9, FontStyle.Bold);
                 b.Cursor = Cursors.Hand;
             }
 
-            btnLimpiarPrestamo.Width = 100;
-            btnLimpiarPrestamo.Height = 35;
-            btnLimpiarPrestamo.BackColor = amarilloUDB;
-            btnLimpiarPrestamo.ForeColor = azulUDB;
-            btnLimpiarPrestamo.FlatStyle = FlatStyle.Flat;
-            btnLimpiarPrestamo.FlatAppearance.BorderSize = 0;
+            btnLimpiarPrestamo.Width = 100; btnLimpiarPrestamo.Height = 35;
+            btnLimpiarPrestamo.BackColor = amarilloUDB; btnLimpiarPrestamo.ForeColor = azulUDB;
+            btnLimpiarPrestamo.FlatStyle = FlatStyle.Flat; btnLimpiarPrestamo.FlatAppearance.BorderSize = 0;
             btnLimpiarPrestamo.Font = new Font("Segoe UI", 9, FontStyle.Bold);
             btnLimpiarPrestamo.Cursor = Cursors.Hand;
 
-            // Botón Generar Gráficos
-            btnGenerarGraficos.BackColor = azulUDB;
-            btnGenerarGraficos.ForeColor = blancoUDB;
-            btnGenerarGraficos.FlatStyle = FlatStyle.Flat;
-            btnGenerarGraficos.FlatAppearance.BorderSize = 0;
+            btnGenerarGraficos.BackColor = azulUDB; btnGenerarGraficos.ForeColor = blancoUDB;
+            btnGenerarGraficos.FlatStyle = FlatStyle.Flat; btnGenerarGraficos.FlatAppearance.BorderSize = 0;
             btnGenerarGraficos.Font = new Font("Segoe UI", 9, FontStyle.Bold);
             btnGenerarGraficos.Cursor = Cursors.Hand;
 
-            // Encabezados de tablas en azul UDB
             dgvLibros.ColumnHeadersDefaultCellStyle.BackColor = azulUDB;
             dgvLibros.ColumnHeadersDefaultCellStyle.ForeColor = blancoUDB;
             dgvLibros.ColumnHeadersDefaultCellStyle.Font = new Font("Segoe UI", 9, FontStyle.Bold);
@@ -171,21 +158,17 @@ namespace GestionBiblioteca
             dgvPrestamos.ColumnHeadersDefaultCellStyle.ForeColor = blancoUDB;
             dgvPrestamos.ColumnHeadersDefaultCellStyle.Font = new Font("Segoe UI", 9, FontStyle.Bold);
 
-            // Filas alternadas en amarillo suave
             dgvLibros.AlternatingRowsDefaultCellStyle.BackColor = Color.FromArgb(255, 250, 220);
             dgvUsuarios.AlternatingRowsDefaultCellStyle.BackColor = Color.FromArgb(255, 250, 220);
             dgvPrestamos.AlternatingRowsDefaultCellStyle.BackColor = Color.FromArgb(255, 250, 220);
 
-            // Fondo de los paneles de campos en azul UDB
             panelCamposLibro.BackColor = azulUDB;
             panelUsuarios.BackColor = azulUDB;
             panelPrestamo.BackColor = azulUDB;
 
-            // Fondo de los paneles de botones en gris claro
             panelBotonesUsuarios.BackColor = grisClaro;
             panelBotonesPrestamos.BackColor = grisClaro;
 
-            // Labels en blanco y TextBoxes visibles en paneles
             foreach (Control c in panelCamposLibro.Controls)
             {
                 if (c is System.Windows.Forms.Label) c.ForeColor = blancoUDB;
@@ -204,6 +187,17 @@ namespace GestionBiblioteca
                 if (c is TextBox) { c.BackColor = blancoUDB; c.ForeColor = Color.Black; }
                 if (c is ComboBox) { c.BackColor = blancoUDB; c.ForeColor = Color.Black; }
             }
+
+            foreach (Control c in panelUsuarios.Controls)
+            {
+                if (c is TextBox tx)
+                {
+                    tx.BackColor = Color.White;
+                    tx.ForeColor = Color.Black;
+                    tx.Visible = true;
+                    tx.BringToFront();
+                }
+            }
         }
 
         // ===== LIBROS =====
@@ -214,12 +208,13 @@ namespace GestionBiblioteca
             dgvLibros.DataSource = lista;
             dgvLibros.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             dgvLibros.MultiSelect = false;
+            dgvLibros.AllowUserToAddRows = false;
             if (dgvLibros.Columns.Contains("Disponible"))
                 dgvLibros.Columns["Disponible"].Visible = false;
             dgvLibros.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dgvLibros.ColumnHeadersDefaultCellStyle.Font = new Font("Segoe UI", 9, FontStyle.Bold);
             dgvLibros.RowTemplate.Height = 28;
-            dgvLibros.AlternatingRowsDefaultCellStyle.BackColor = Color.FromArgb(240, 248, 255);
+            dgvLibros.AlternatingRowsDefaultCellStyle.BackColor = Color.FromArgb(255, 250, 220);
         }
 
         private bool ValidarLibro()
@@ -325,12 +320,13 @@ namespace GestionBiblioteca
             dgvUsuarios.DataSource = lista;
             dgvUsuarios.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             dgvUsuarios.MultiSelect = false;
+            dgvUsuarios.AllowUserToAddRows = false;
             if (dgvUsuarios.Columns.Contains("Prestamos"))
                 dgvUsuarios.Columns["Prestamos"].Visible = false;
             dgvUsuarios.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dgvUsuarios.ColumnHeadersDefaultCellStyle.Font = new Font("Segoe UI", 9, FontStyle.Bold);
             dgvUsuarios.RowTemplate.Height = 28;
-            dgvUsuarios.AlternatingRowsDefaultCellStyle.BackColor = Color.FromArgb(240, 248, 255);
+            dgvUsuarios.AlternatingRowsDefaultCellStyle.BackColor = Color.FromArgb(255, 250, 220);
         }
 
         private bool ValidarUsuario()
@@ -460,13 +456,15 @@ namespace GestionBiblioteca
                     p.Devuelto ? "Devuelto" : "Pendiente"
                 );
             }
+
             dgvPrestamos.DataSource = tabla;
             dgvPrestamos.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             dgvPrestamos.MultiSelect = false;
+            dgvPrestamos.AllowUserToAddRows = false;
             dgvPrestamos.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dgvPrestamos.ColumnHeadersDefaultCellStyle.Font = new Font("Segoe UI", 9, FontStyle.Bold);
             dgvPrestamos.RowTemplate.Height = 28;
-            dgvPrestamos.AlternatingRowsDefaultCellStyle.BackColor = Color.FromArgb(240, 248, 255);
+            dgvPrestamos.AlternatingRowsDefaultCellStyle.BackColor = Color.FromArgb(255, 250, 220);
         }
 
         private void CargarComboBoxes()
@@ -499,6 +497,24 @@ namespace GestionBiblioteca
             {
                 MostrarGraficoLibrosMasPrestados();
                 MostrarGraficoUsuariosMasActivos();
+            }
+            if (TabControl1.SelectedTab == TabUsuarios)
+            {
+                foreach (Control c in panelUsuarios.Controls)
+                {
+                    if (c is System.Windows.Forms.Label) c.ForeColor = Color.White;
+                    if (c is TextBox) { c.BackColor = Color.White; c.ForeColor = Color.Black; }
+                }
+                panelUsuarios.BackColor = Color.FromArgb(0, 51, 153);
+            }
+            if (TabControl1.SelectedTab == TabLibros)
+            {
+                foreach (Control c in panelCamposLibro.Controls)
+                {
+                    if (c is System.Windows.Forms.Label) c.ForeColor = Color.White;
+                    if (c is TextBox) { c.BackColor = Color.White; c.ForeColor = Color.Black; }
+                }
+                panelCamposLibro.BackColor = Color.FromArgb(0, 51, 153);
             }
         }
 
@@ -635,39 +651,12 @@ namespace GestionBiblioteca
             panelGrafico2.Controls.Add(formsPlot);
         }
 
-        private void txtTelefono_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void panel1_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
-
-        private void lblUsuarioPrestamo_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void txtCorreo_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void txtNombre_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void dtpFechaDevolucion_ValueChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void cmbLibro_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-        }
+        private void txtTelefono_TextChanged(object sender, EventArgs e) { }
+        private void panel1_Paint(object sender, PaintEventArgs e) { }
+        private void lblUsuarioPrestamo_Click(object sender, EventArgs e) { }
+        private void txtCorreo_TextChanged(object sender, EventArgs e) { }
+        private void txtNombre_TextChanged(object sender, EventArgs e) { }
+        private void dtpFechaDevolucion_ValueChanged(object sender, EventArgs e) { }
+        private void cmbLibro_SelectedIndexChanged(object sender, EventArgs e) { }
     }
 }

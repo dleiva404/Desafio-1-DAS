@@ -2,15 +2,8 @@
 {
     partial class PrincipalForm
     {
-        /// <summary>
-        ///  Required designer variable.
-        /// </summary>
         private System.ComponentModel.IContainer components = null;
 
-        /// <summary>
-        ///  Clean up any resources being used.
-        /// </summary>
-        /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
         protected override void Dispose(bool disposing)
         {
             if (disposing && (components != null))
@@ -22,10 +15,6 @@
 
         #region Windows Form Designer generated code
 
-        /// <summary>
-        ///  Required method for Designer support - do not modify
-        ///  the contents of this method with the code editor.
-        /// </summary>
         private void InitializeComponent()
         {
             TabPrestamos = new TabPage();
@@ -122,60 +111,59 @@
             // dtpFechaDevolucion
             // 
             dtpFechaDevolucion.Font = new Font("Segoe UI", 11F);
-            dtpFechaDevolucion.Location = new Point(137, 119);
+            dtpFechaDevolucion.Location = new Point(111, 116);
             dtpFechaDevolucion.Name = "dtpFechaDevolucion";
             dtpFechaDevolucion.Size = new Size(288, 27);
-            dtpFechaDevolucion.TabIndex = 8;
+            dtpFechaDevolucion.TabIndex = 14;
             dtpFechaDevolucion.ValueChanged += dtpFechaDevolucion_ValueChanged;
             // 
             // lblUsuarioPrestamo
             // 
             lblUsuarioPrestamo.AutoSize = true;
             lblUsuarioPrestamo.Font = new Font("Segoe UI", 11F);
-            lblUsuarioPrestamo.Location = new Point(65, 36);
+            lblUsuarioPrestamo.Location = new Point(39, 33);
             lblUsuarioPrestamo.Name = "lblUsuarioPrestamo";
             lblUsuarioPrestamo.Size = new Size(70, 20);
-            lblUsuarioPrestamo.TabIndex = 3;
+            lblUsuarioPrestamo.TabIndex = 9;
             lblUsuarioPrestamo.Text = "Usuario : ";
-            lblUsuarioPrestamo.Click += lblUsuarioPrestamo_Click;
             // 
             // cmbLibro
             // 
             cmbLibro.Font = new Font("Segoe UI", 11F);
             cmbLibro.FormattingEnabled = true;
-            cmbLibro.Location = new Point(137, 77);
+            cmbLibro.Location = new Point(111, 74);
             cmbLibro.Name = "cmbLibro";
-            cmbLibro.Size = new Size(121, 28);
-            cmbLibro.TabIndex = 7;
+            cmbLibro.Size = new Size(250, 28);
+            cmbLibro.TabIndex = 13;
             cmbLibro.SelectedIndexChanged += cmbLibro_SelectedIndexChanged;
             // 
             // lblLibroPrestamo
             // 
             lblLibroPrestamo.AutoSize = true;
             lblLibroPrestamo.Font = new Font("Segoe UI", 11F);
-            lblLibroPrestamo.Location = new Point(81, 80);
+            lblLibroPrestamo.Location = new Point(55, 77);
             lblLibroPrestamo.Name = "lblLibroPrestamo";
             lblLibroPrestamo.Size = new Size(50, 20);
-            lblLibroPrestamo.TabIndex = 4;
+            lblLibroPrestamo.TabIndex = 10;
             lblLibroPrestamo.Text = "Libro :";
             // 
             // cmbUsuario
             // 
             cmbUsuario.Font = new Font("Segoe UI", 11F);
             cmbUsuario.FormattingEnabled = true;
-            cmbUsuario.Location = new Point(137, 33);
+            cmbUsuario.Location = new Point(111, 30);
             cmbUsuario.Name = "cmbUsuario";
-            cmbUsuario.Size = new Size(121, 28);
-            cmbUsuario.TabIndex = 6;
+            cmbUsuario.Size = new Size(250, 28);
+            cmbUsuario.TabIndex = 12;
             // 
             // lblFechaDevolucion
             // 
             lblFechaDevolucion.AutoSize = true;
             lblFechaDevolucion.Font = new Font("Segoe UI", 11F);
-            lblFechaDevolucion.Location = new Point(69, 124);
+            lblFechaDevolucion.Location = new Point(43, 121);
             lblFechaDevolucion.Name = "lblFechaDevolucion";
             lblFechaDevolucion.Size = new Size(62, 20);
-            lblFechaDevolucion.TabIndex = 5;
+            lblFechaDevolucion.TabIndex = 11;
             lblFechaDevolucion.Text = "Fecha  : ";
             // 
             // panelBotonesPrestamos
@@ -228,7 +216,7 @@
             dgvPrestamos.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dgvPrestamos.Location = new Point(3, 3);
             dgvPrestamos.Name = "dgvPrestamos";
-            dgvPrestamos.Size = new Size(1170, 300);
+            dgvPrestamos.Size = new Size(1170, 400);
             dgvPrestamos.TabIndex = 1;
             // 
             // TabUsuarios
@@ -246,11 +234,11 @@
             // 
             // panelUsuarios
             // 
+            panelUsuarios.Controls.Add(txtNombre);
             panelUsuarios.Controls.Add(txtCorreo);
             panelUsuarios.Controls.Add(txtTelefono);
             panelUsuarios.Controls.Add(lblNombre);
             panelUsuarios.Controls.Add(lblCorreo);
-            panelUsuarios.Controls.Add(txtNombre);
             panelUsuarios.Controls.Add(lblTelefono);
             panelUsuarios.Dock = DockStyle.Bottom;
             panelUsuarios.Location = new Point(3, 409);
@@ -259,61 +247,61 @@
             panelUsuarios.TabIndex = 8;
             panelUsuarios.Paint += panel1_Paint;
             // 
+            // txtNombre
+            // 
+            txtNombre.Font = new Font("Segoe UI", 11F);
+            txtNombre.Location = new Point(111, 34);
+            txtNombre.Name = "txtNombre";
+            txtNombre.Size = new Size(280, 27);
+            txtNombre.TabIndex = 17;
+            txtNombre.TextChanged += txtNombre_TextChanged;
+            // 
             // txtCorreo
             // 
-            txtCorreo.Anchor = AnchorStyles.Left | AnchorStyles.Right;
-            txtCorreo.Location = new Point(127, 66);
+            txtCorreo.Font = new Font("Segoe UI", 11F);
+            txtCorreo.Location = new Point(111, 74);
             txtCorreo.Name = "txtCorreo";
-            txtCorreo.Size = new Size(100, 23);
-            txtCorreo.TabIndex = 6;
+            txtCorreo.Size = new Size(280, 27);
+            txtCorreo.TabIndex = 18;
             txtCorreo.TextChanged += txtCorreo_TextChanged;
             // 
             // txtTelefono
             // 
-            txtTelefono.Anchor = AnchorStyles.Left | AnchorStyles.Right;
-            txtTelefono.Location = new Point(127, 107);
+            txtTelefono.Font = new Font("Segoe UI", 11F);
+            txtTelefono.Location = new Point(111, 115);
             txtTelefono.Name = "txtTelefono";
-            txtTelefono.Size = new Size(100, 23);
-            txtTelefono.TabIndex = 7;
+            txtTelefono.Size = new Size(280, 27);
+            txtTelefono.TabIndex = 19;
             txtTelefono.TextChanged += txtTelefono_TextChanged;
             // 
             // lblNombre
             // 
             lblNombre.AutoSize = true;
             lblNombre.Font = new Font("Segoe UI", 11F);
-            lblNombre.Location = new Point(50, 29);
+            lblNombre.Location = new Point(34, 37);
             lblNombre.Name = "lblNombre";
             lblNombre.Size = new Size(71, 20);
-            lblNombre.TabIndex = 2;
+            lblNombre.TabIndex = 14;
             lblNombre.Text = "Nombre :";
             // 
             // lblCorreo
             // 
             lblCorreo.AutoSize = true;
             lblCorreo.Font = new Font("Segoe UI", 11F);
-            lblCorreo.Location = new Point(55, 69);
+            lblCorreo.Location = new Point(39, 77);
             lblCorreo.Name = "lblCorreo";
             lblCorreo.Size = new Size(65, 20);
-            lblCorreo.TabIndex = 3;
+            lblCorreo.TabIndex = 15;
             lblCorreo.Text = "Correo : ";
-            // 
-            // txtNombre
-            // 
-            txtNombre.Anchor = AnchorStyles.Left | AnchorStyles.Right;
-            txtNombre.Location = new Point(127, 26);
-            txtNombre.Name = "txtNombre";
-            txtNombre.Size = new Size(100, 23);
-            txtNombre.TabIndex = 5;
-            txtNombre.TextChanged += txtNombre_TextChanged;
             // 
             // lblTelefono
             // 
             lblTelefono.AutoSize = true;
             lblTelefono.Font = new Font("Segoe UI", 11F);
-            lblTelefono.Location = new Point(45, 110);
+            lblTelefono.Location = new Point(29, 118);
             lblTelefono.Name = "lblTelefono";
             lblTelefono.Size = new Size(78, 20);
-            lblTelefono.TabIndex = 4;
+            lblTelefono.TabIndex = 16;
             lblTelefono.Text = "Teléfono : ";
             // 
             // panelBotonesUsuarios
@@ -378,7 +366,7 @@
             dgvUsuarios.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dgvUsuarios.Location = new Point(3, 3);
             dgvUsuarios.Name = "dgvUsuarios";
-            dgvUsuarios.Size = new Size(1170, 300);
+            dgvUsuarios.Size = new Size(1170, 400);
             dgvUsuarios.TabIndex = 0;
             dgvUsuarios.CellClick += dgvUsuarios_CellClick;
             // 
@@ -413,15 +401,38 @@
             // 
             // txtTitulo
             // 
-            txtTitulo.Anchor = AnchorStyles.Left | AnchorStyles.Right;
+            txtTitulo.Font = new Font("Segoe UI", 11F);
             txtTitulo.Location = new Point(111, 18);
             txtTitulo.Name = "txtTitulo";
-            txtTitulo.Size = new Size(280, 23);
+            txtTitulo.Size = new Size(280, 27);
             txtTitulo.TabIndex = 3;
+            // 
+            // txtAutor
+            // 
+            txtAutor.Font = new Font("Segoe UI", 11F);
+            txtAutor.Location = new Point(111, 53);
+            txtAutor.Name = "txtAutor";
+            txtAutor.Size = new Size(280, 27);
+            txtAutor.TabIndex = 4;
+            // 
+            // txtAnio
+            // 
+            txtAnio.Font = new Font("Segoe UI", 11F);
+            txtAnio.Location = new Point(111, 89);
+            txtAnio.Name = "txtAnio";
+            txtAnio.Size = new Size(150, 27);
+            txtAnio.TabIndex = 5;
+            // 
+            // txtGenero
+            // 
+            txtGenero.Font = new Font("Segoe UI", 11F);
+            txtGenero.Location = new Point(111, 124);
+            txtGenero.Name = "txtGenero";
+            txtGenero.Size = new Size(280, 27);
+            txtGenero.TabIndex = 6;
             // 
             // lblAnio
             // 
-            lblAnio.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
             lblAnio.AutoSize = true;
             lblAnio.Font = new Font("Segoe UI", 11F);
             lblAnio.Location = new Point(62, 89);
@@ -430,25 +441,8 @@
             lblAnio.TabIndex = 4;
             lblAnio.Text = "Año :";
             // 
-            // txtAutor
-            // 
-            txtAutor.Anchor = AnchorStyles.Left | AnchorStyles.Right;
-            txtAutor.Location = new Point(111, 53);
-            txtAutor.Name = "txtAutor";
-            txtAutor.Size = new Size(280, 23);
-            txtAutor.TabIndex = 4;
-            // 
-            // txtGenero
-            // 
-            txtGenero.Anchor = AnchorStyles.Left | AnchorStyles.Right;
-            txtGenero.Location = new Point(111, 124);
-            txtGenero.Name = "txtGenero";
-            txtGenero.Size = new Size(100, 23);
-            txtGenero.TabIndex = 6;
-            // 
             // lblTitulo
             // 
-            lblTitulo.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
             lblTitulo.AutoSize = true;
             lblTitulo.Font = new Font("Segoe UI", 11F);
             lblTitulo.Location = new Point(51, 17);
@@ -459,7 +453,6 @@
             // 
             // lblGenero
             // 
-            lblGenero.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
             lblGenero.AutoSize = true;
             lblGenero.Font = new Font("Segoe UI", 11F);
             lblGenero.Location = new Point(41, 123);
@@ -470,7 +463,6 @@
             // 
             // lblAutor
             // 
-            lblAutor.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
             lblAutor.AutoSize = true;
             lblAutor.Font = new Font("Segoe UI", 11F);
             lblAutor.Location = new Point(52, 53);
@@ -478,14 +470,6 @@
             lblAutor.Size = new Size(53, 20);
             lblAutor.TabIndex = 3;
             lblAutor.Text = "Autor :";
-            // 
-            // txtAnio
-            // 
-            txtAnio.Anchor = AnchorStyles.Left | AnchorStyles.Right;
-            txtAnio.Location = new Point(111, 89);
-            txtAnio.Name = "txtAnio";
-            txtAnio.Size = new Size(100, 23);
-            txtAnio.TabIndex = 5;
             // 
             // panelBotonesLibros
             // 
@@ -553,7 +537,7 @@
             dgvLibros.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dgvLibros.Location = new Point(3, 3);
             dgvLibros.Name = "dgvLibros";
-            dgvLibros.Size = new Size(1170, 300);
+            dgvLibros.Size = new Size(1170, 400);
             dgvLibros.TabIndex = 1;
             dgvLibros.CellClick += dgvLibros_CellClick;
             // 
@@ -643,24 +627,12 @@
 
         #endregion
         private TabPage TabPrestamos;
-        private DateTimePicker dtpFechaDevolucion;
-        private ComboBox cmbLibro;
-        private ComboBox cmbUsuario;
-        private Label lblFechaDevolucion;
-        private Label lblLibroPrestamo;
-        private Label lblUsuarioPrestamo;
         private Panel panelBotonesPrestamos;
         private Button btnLimpiarPrestamo;
         private Button btnDevolverPrestamo;
         private Button btnRegistrarPrestamo;
         private DataGridView dgvPrestamos;
         private TabPage TabUsuarios;
-        private TextBox txtTelefono;
-        private TextBox txtCorreo;
-        private TextBox txtNombre;
-        private Label lblTelefono;
-        private Label lblCorreo;
-        private Label lblNombre;
         private Panel panelBotonesUsuarios;
         private Button btnLimpiarUsuario;
         private Button btnEliminarUsuario;
@@ -690,5 +662,17 @@
         private Panel panelCamposLibro;
         private Panel panelUsuarios;
         private Panel panelPrestamo;
+        private TextBox txtCorreo;
+        private TextBox txtTelefono;
+        private Label lblNombre;
+        private Label lblCorreo;
+        private TextBox txtNombre;
+        private Label lblTelefono;
+        private DateTimePicker dtpFechaDevolucion;
+        private Label lblUsuarioPrestamo;
+        private ComboBox cmbLibro;
+        private Label lblLibroPrestamo;
+        private ComboBox cmbUsuario;
+        private Label lblFechaDevolucion;
     }
 }
