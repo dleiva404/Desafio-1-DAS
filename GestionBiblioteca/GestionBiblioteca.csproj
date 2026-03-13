@@ -9,16 +9,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="logo_udb.png" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Content Include="logo_udb.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-  </ItemGroup>
-
-  <ItemGroup>
     <PackageReference Include="ScottPlot.WinForms" Version="5.1.57" />
   </ItemGroup>
 
